@@ -23,6 +23,22 @@ public class EnemyTests {
         assertFalse(slime.isAlive());
     }
 
+    @Test
+    public void testEnemyAliveWhenHealthAboveZero() {
+        Enemy slime = new Slime();
+
+        slime.takeDamage(10);
+
+        assertTrue(slime.isAlive());
+    }
+
+    @Test
+    public void testEnemyHint() {
+        Enemy slime = new Slime();
+
+        assertEquals("sloshing", slime.getHint());
+    }
+
 
 
 

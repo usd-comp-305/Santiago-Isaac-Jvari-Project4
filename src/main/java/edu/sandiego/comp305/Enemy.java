@@ -16,12 +16,16 @@ public abstract class Enemy {
     }
 
     public void takeDamage(int amount) {
-        // TODO
+        health = health-amount;
     }
 
     public boolean isAlive() {
-        // TODO
-        return false;
+        if (getHealth() == 0) {
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     public String getHint() {
