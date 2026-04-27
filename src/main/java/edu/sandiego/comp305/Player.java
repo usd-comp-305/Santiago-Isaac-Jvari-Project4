@@ -33,6 +33,5 @@ public class Player {
     public boolean isAlive(){
         return false;
     }
+
 }
-
-
