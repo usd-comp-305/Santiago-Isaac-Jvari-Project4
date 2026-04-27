@@ -8,6 +8,7 @@ public abstract class Enemy {
     public String hint;
     public AttackStrategy attackStrategy;
     public EnemyBehaviorStrategy behaviorStrategy;
+    public int defenseBonus = 0;
 
     public Enemy(String name, int health, int attackPower, int goldReward, String hint) {
         this.name = name;
@@ -23,7 +24,18 @@ public abstract class Enemy {
     }
 
     public void takeDamage(int amount) {
-        health-=amount;
+        int reducedDamage = amount - defenseBonus;
+
+        if (reducedDamage < 0) {
+            reducedDamage = 0;
+        }
+
+        health -= reducedDamage;
+
+        if (health < 0) {
+            health = 0;
+        }
+        defenseBonus = 0;
     }
 
     public boolean isAlive() {
@@ -40,10 +52,12 @@ public abstract class Enemy {
     }
 
     public int getHealth() {
+
         return health;
     }
 
     public void setAttackStrategy(AttackStrategy strategy) {
+
         attackStrategy = strategy;
     }
 
@@ -61,6 +75,10 @@ public abstract class Enemy {
 
     public String getName() {
         return name;
+    }
+
+    public void defend() {
+        defenseBonus = 5;
     }
 
 
