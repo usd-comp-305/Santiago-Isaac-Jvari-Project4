@@ -1,5 +1,3 @@
-package edu.sandiego.comp305;
-
 /**
  * Utility class for String operations.
  */
