@@ -33,5 +33,6 @@ public class EnemyFactoryTests {
         assertNotNull(boss);
         assertTrue(boss instanceof BossEnemy);
     }
+
 }
 
