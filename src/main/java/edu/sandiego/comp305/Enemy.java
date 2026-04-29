@@ -9,6 +9,7 @@ public abstract class Enemy {
     public AttackStrategy attackStrategy;
     public EnemyBehaviorStrategy behaviorStrategy;
     public int defenseBonus = 0;
+    public int attackBonus = 0;
 
     public Enemy(String name, int health, int attackPower, int goldReward, String hint) {
         this.name = name;
@@ -20,7 +21,13 @@ public abstract class Enemy {
     }
 
     public void attack(Player player) {
-        // TODO
+        int totalAttack = attackPower + attackBonus;
+
+        int damage = attackStrategy.executeAttack(totalAttack);
+
+        player.takeDamage(damage);
+
+        attackBonus = 0;
     }
 
     public void takeDamage(int amount) {
@@ -52,12 +59,10 @@ public abstract class Enemy {
     }
 
     public int getHealth() {
-
         return health;
     }
 
     public void setAttackStrategy(AttackStrategy strategy) {
-
         attackStrategy = strategy;
     }
 
@@ -80,6 +85,8 @@ public abstract class Enemy {
     public void defend() {
         defenseBonus = 5;
     }
+
+    public void rage(){attackBonus = 5;}
 
 
 }
