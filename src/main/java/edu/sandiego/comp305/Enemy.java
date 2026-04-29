@@ -88,5 +88,11 @@ public abstract class Enemy {
 
     public void rage(){attackBonus = 5;}
 
+    public void increaseStats(int difficultyLevel) {
+        health += difficultyLevel * 5;
+        attackPower += difficultyLevel * 2;
+        goldReward += difficultyLevel * 3;
+    }
+
 
 }
