@@ -1,21 +1,27 @@
 package edu.sandiego.comp305;
 
 public class EnemyFactory {
-
-    public Enemy createEnemy(String type) {
-        if (type.equalsIgnoreCase("slime")) {
+    // add to this for every new enemy class/ boss class
+    public Enemy createEnemy(String enemyType) {
+        if (enemyType.equalsIgnoreCase("slime")) {
             return new Slime();
-        } else if (type.equalsIgnoreCase("zombie")) {
+        } else if (enemyType.equalsIgnoreCase("zombie")) {
             return new Zombie();
-        } else if (type.equalsIgnoreCase("skeleton")) {
+        } else if (enemyType.equalsIgnoreCase("skeleton")) {
             return new Skeleton();
-        } else {
-            throw new IllegalArgumentException("Unknown enemy type");
+        } else if (enemyType.equalsIgnoreCase("Lich")) {
+            return new BossEnemy();
         }
+
+        throw new IllegalArgumentException("Unknown enemy type");
     }
 
-    public BossEnemy createBoss() {
-        return new BossEnemy();
+    public Enemy createEnemy(String enemyType, int difficultyLevel) {
+        Enemy enemy = createEnemy(enemyType);
+
+        enemy.increaseStats(difficultyLevel);
+
+        return enemy;
     }
 }
 
