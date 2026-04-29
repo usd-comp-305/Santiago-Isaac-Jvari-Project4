@@ -23,7 +23,6 @@ public class Dungeon {
 
     public boolean rollBossEncounter() {
         // TODO: implement
-        return false;
     }
 
     public String getHint(Direction direction) {

@@ -3,6 +3,6 @@ package edu.sandiego.comp305;
 public class Skeleton extends Enemy {
 
     public Skeleton() {
-        // TODO: implement
+        super("Skeleton", 33, 6, 11, "rattling");
     }
 }
