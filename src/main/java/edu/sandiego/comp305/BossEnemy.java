@@ -1,10 +1,6 @@
 package edu.sandiego.comp305;
 
-public class BossEnemy extends Enemy {
-
-    public BossEnemy() {
-        // TODO: implement
-    }
+public class BossEnemy {
 
     public void triggerDifficultyIncrease(Dungeon dungeon) {
         // TODO: implement
