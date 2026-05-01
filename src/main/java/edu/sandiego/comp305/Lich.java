@@ -1,8 +1,8 @@
 package edu.sandiego.comp305;
 
-public class Lich extends BossEnemy {
+public class Lich extends BossEnemy  {
 
     public Lich() {
-        // TODO: implement
+        super("Lich", 80, 20, 20, "Ominous Presence");
     }
 }
