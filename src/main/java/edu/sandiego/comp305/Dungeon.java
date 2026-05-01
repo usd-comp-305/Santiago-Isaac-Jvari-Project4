@@ -1,14 +1,25 @@
 package edu.sandiego.comp305;
 
+import java.util.ArrayList;
+
 public class Dungeon {
 
     int difficultyLevel;
     int roomsExplored;
     double bossEncounterChance;
-
+    boolean playerInside;
 
     EnemyFactory enemyFactory;
     HintSystem hintSystem;
+
+    public Dungeon() {
+        this.difficultyLevel = 1;
+        this.roomsExplored = 0;
+        this.bossEncounterChance = 0.1;
+        this.enemyFactory = new EnemyFactory();
+        this.hintSystem = new HintSystem();
+        this.playerInside = false;
+    }
 
     public Encounter exploreDirection(Direction direction) {
         // TODO: implement
@@ -17,7 +28,8 @@ public class Dungeon {
 
 
     public void increaseDifficulty() {
-        // TODO: implement
+        difficultyLevel +=1;
+        bossEncounterChance= bossEncounterChance / 2 + bossEncounterChance;
     }
 
 
@@ -29,5 +41,10 @@ public class Dungeon {
     public String getHint(Direction direction) {
         // TODO: implement
         return null;
+    }
+
+    public boolean InDungeon() {
+        playerInside = !playerInside;
+        return playerInside;
     }
 }
