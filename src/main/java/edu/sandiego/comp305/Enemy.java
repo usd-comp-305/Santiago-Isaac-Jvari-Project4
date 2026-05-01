@@ -81,5 +81,8 @@ public abstract class Enemy {
         defenseBonus = 5;
     }
 
+    public void rage() {
+
+    }
 
 }
