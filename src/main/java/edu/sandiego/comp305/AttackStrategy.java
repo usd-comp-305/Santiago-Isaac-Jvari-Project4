@@ -1,4 +1,5 @@
 package edu.sandiego.comp305;
 
-public class AttackStrategy {
+public interface AttackStrategy {
+    int executeAttack(int attackerPower);
 }
