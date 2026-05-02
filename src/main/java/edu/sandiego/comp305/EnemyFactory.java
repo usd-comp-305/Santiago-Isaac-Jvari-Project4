@@ -2,8 +2,9 @@ package edu.sandiego.comp305;
 
 public class EnemyFactory {
     // add to this for every new enemy class/ boss class
-    public Enemy createEnemy(String enemyType, int difficultyLevel) {
-        Enemy enemy;
+    public Enemy createEnemy(final String enemyType,
+            final int difficultyLevel) {
+        final Enemy enemy;
 
         if (enemyType.equalsIgnoreCase("slime")) {
             enemy = new Slime();
@@ -19,7 +20,7 @@ public class EnemyFactory {
         return enemy;
     }
 
-    private Enemy createBoss(String bossName) {
+    public Enemy createBoss(final String bossName) {
         if (bossName.equalsIgnoreCase("Lich")) {
             return new Lich();
         } else if (bossName.equalsIgnoreCase("Minotaur")) {
