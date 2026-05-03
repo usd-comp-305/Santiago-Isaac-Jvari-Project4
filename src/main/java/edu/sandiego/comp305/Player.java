@@ -52,13 +52,3 @@ public class Player {
     }
 
 }
-
-
-//Todo: Remove Temp classes
-class EnemyFactory{}
-class Enemy{}
-class Weapon{}
-class Armor{}
-class Potion{}
-class AttackStrategy{}
-class Shop{}
