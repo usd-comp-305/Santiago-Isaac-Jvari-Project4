@@ -4,6 +4,14 @@ public abstract class Item{
     public String name;
 
     public int cost;
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCost() {
+        return cost;
+    }
 }
 
 

@@ -41,7 +41,6 @@ public class Game {
     private void gameLoop() {
 
         System.out.println("You begin in town of Magnavox");
-        final Scanner scanner = null;
 
         boolean running = true;
         while (running) {
@@ -66,8 +65,6 @@ public class Game {
                 running = false;
             }
         }
-
-        scanner.close();
     }
 
     public boolean townChoices(){
@@ -129,7 +126,7 @@ public class Game {
     }
 
     public String getChoice () {
-        final Scanner scanner = null;
+        final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
         System.out.println("=============================");
         System.out.print("Enter choice: ");
         return scanner.nextLine();
@@ -145,14 +142,24 @@ public class Game {
     }
 
     public void notifyObservers(final String message) {
-        // TODO: implement
+        for (final GameObserver observer : observers) {
+            observer.update(message);
+        }
     }
 
     public void addObserver(final GameObserver observer) {
-        // TODO: implement
+        observers.add(observer);
     }
 
     public void removeObserver(final GameObserver observer) {
-        // TODO: implement
+        observers.remove(observer);
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public CombatManager getCombatManager() {
+        return combatManager;
     }
 }

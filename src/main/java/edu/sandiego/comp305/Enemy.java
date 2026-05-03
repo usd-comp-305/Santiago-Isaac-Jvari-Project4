@@ -75,6 +75,10 @@ public abstract class Enemy {
         behaviorStrategy = strategy;
     }
 
+    public EnemyBehaviorStrategy getBehaviorStrategy() {
+        return behaviorStrategy;
+    }
+
     public int getAttackPower() {
         return attackPower;
     }

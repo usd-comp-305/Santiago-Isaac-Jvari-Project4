@@ -14,7 +14,7 @@ public class Player {
 
     Armor armor;
 
-    ArrayList<Item> inventory;
+    ArrayList<Item> inventory = new ArrayList<>();
 
     AttackStrategy attackStrategy;
 
@@ -43,22 +43,34 @@ public class Player {
     }
 
     public void buyItem(final Item item){
-
+        this.inventory.add(item);
     }
 
     public void usePotion(final Potion potion){
     }
 
     public void equipWeapon(final Weapon weapon){
-
+        this.weapon = weapon;
     }
 
     public void equipArmor(final Armor armor){
-
+        this.armor = armor;
     }
 
     public void setAttackStrategy(final AttackStrategy strategy){
+        this.attackStrategy = strategy;
+    }
 
+    public int getGold() {
+        return gold;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public AttackStrategy getAttackStrategy() {
+        return attackStrategy;
     }
 
     public boolean isAlive(){

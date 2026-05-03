@@ -41,8 +41,15 @@ public class Dungeon {
     }
 
     public String getHint(final Direction direction) {
-        // TODO: implement
-        return null;
+        return hintSystem.getDirectionalMessage(direction, null);
+    }
+
+    public int getRoomsExplored() {
+        return roomsExplored;
+    }
+
+    public EnemyFactory getEnemyFactory() {
+        return enemyFactory;
     }
 
     public boolean inDungeon() {
