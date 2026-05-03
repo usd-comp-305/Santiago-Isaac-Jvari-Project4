@@ -12,16 +12,16 @@ class PlayerTest {
 
     @Test
     void takeDamage() {
-        Player player = new Player();
+        final Player player = new Player();
         player.health = 100;
         player.takeDamage(5);
-
+        assertEquals(95, player.health);
     }
 
 
     @Test
     void heal() {
-        Player player = new Player("Isaac", 10, 0);
+        final Player player = new Player("Isaac", 10, 0);
         player.heal(5);
         assertEquals(15, player.health);
 
@@ -49,14 +49,14 @@ class PlayerTest {
 
     @Test
     void isAliveTrue() {
-        Player player = new Player();
+        final Player player = new Player();
         assertEquals(100, player.health);
         assertTrue(player.isAlive());
     }
 
     @Test
     void isAliveFalse() {
-        Player player = new Player();
+        final Player player = new Player();
         player.takeDamage(100);
         assertFalse(player.isAlive());
     }

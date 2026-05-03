@@ -3,25 +3,25 @@ package edu.sandiego.comp305;
 
 public class CombatManager {
 
-    public void startCombat(Player player, Enemy enemy) {
+    public void startCombat(final Player player, final Enemy enemy) {
         // TODO: implement
     }
 
-    public void playerTurn(Player player, Enemy enemy) {
-        // TODO: implement
-    }
-
-
-    public void enemyTurn(Enemy enemy, Player player) {
+    public void playerTurn(final Player player, final Enemy enemy) {
         // TODO: implement
     }
 
 
-    public void resolveVictory(Player player, Enemy enemy) {
+    public void enemyTurn(final Enemy enemy, final Player player) {
         // TODO: implement
     }
 
-    public void resolveEnemyVictory(Dungeon dungeon, Enemy enemy) {
+
+    public void resolveVictory(final Player player, final Enemy enemy) {
+        // TODO: implement
+    }
+
+    public void resolveEnemyVictory(final Dungeon dungeon, final Enemy enemy) {
         // TODO: implement
     }
 }

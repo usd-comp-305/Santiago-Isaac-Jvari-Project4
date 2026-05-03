@@ -1,8 +1,8 @@
 package edu.sandiego.comp305;
 
-public class Minotaur extends BossEnemy {
+public class Minotaur extends BossEnemy  {
 
     public Minotaur() {
-        // TODO: implement
+        super("Minotaur", 120, 13, 20, "Powerful Presence");
     }
 }

@@ -1,16 +1,27 @@
 package edu.sandiego.comp305;
 
 public abstract class Enemy {
-    public String name;
-    public int health;
-    public int attackPower;
-    public int goldReward;
-    public String hint;
-    public AttackStrategy attackStrategy;
-    public EnemyBehaviorStrategy behaviorStrategy;
-    public int defenseBonus = 0;
 
-    public Enemy(String name, int health, int attackPower, int goldReward, String hint) {
+    public String name;
+
+    public String hint;
+
+    protected int health;
+
+    protected int attackPower;
+
+    protected int goldReward;
+
+    protected AttackStrategy attackStrategy;
+
+    protected EnemyBehaviorStrategy behaviorStrategy;
+
+    protected int defenseBonus = 0;
+
+    protected int attackBonus = 0;
+
+    public Enemy(final String name, final int health,
+            final int attackPower, final int goldReward, final String hint) {
         this.name = name;
         this.health = health;
         this.attackPower = attackPower;
@@ -19,11 +30,17 @@ public abstract class Enemy {
 
     }
 
-    public void attack(Player player) {
-        // TODO
+    public void attack(final Player player) {
+        final int totalAttack = attackPower + attackBonus;
+
+        final int damage = attackStrategy.executeAttack(totalAttack);
+
+        player.takeDamage(damage);
+
+        attackBonus = 0;
     }
 
-    public void takeDamage(int amount) {
+    public void takeDamage(final int amount) {
         int reducedDamage = amount - defenseBonus;
 
         if (reducedDamage < 0) {
@@ -39,12 +56,7 @@ public abstract class Enemy {
     }
 
     public boolean isAlive() {
-        if (getHealth() == 0) {
-            return false;
-        }
-        else{
-            return true;
-        }
+        return getHealth() != 0;
     }
 
     public String getHint() {
@@ -52,17 +64,19 @@ public abstract class Enemy {
     }
 
     public int getHealth() {
-
         return health;
     }
 
-    public void setAttackStrategy(AttackStrategy strategy) {
-
+    public void setAttackStrategy(final AttackStrategy strategy) {
         attackStrategy = strategy;
     }
 
-    public void setBehaviorStrategy(EnemyBehaviorStrategy strategy) {
+    public void setBehaviorStrategy(final EnemyBehaviorStrategy strategy) {
         behaviorStrategy = strategy;
+    }
+
+    public EnemyBehaviorStrategy getBehaviorStrategy() {
+        return behaviorStrategy;
     }
 
     public int getAttackPower() {
@@ -81,5 +95,14 @@ public abstract class Enemy {
         defenseBonus = 5;
     }
 
+    public void rage() {
+        attackBonus = 5;
+    }
+
+    public void increaseStats(final int difficultyLevel) {
+        health += difficultyLevel * 5;
+        attackPower += difficultyLevel * 2;
+        goldReward += difficultyLevel * 3;
+    }
 
 }

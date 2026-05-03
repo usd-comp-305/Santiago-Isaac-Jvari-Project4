@@ -1,15 +1,19 @@
 package edu.sandiego.comp305;
 
 
-public class ItemFactory {
-    public static Weapon createSwordWeapon(int tier){
-        Weapon sword = new Weapon();
+public final class ItemFactory {
+
+    private ItemFactory() {
+        throw new UnsupportedOperationException();
+    }
+
+    public static Weapon createSwordWeapon(final int tier){
+        final Weapon sword = new Weapon();
         if (tier == 1){
             sword.name = "Wood Sword";
             sword.cost = 10;
             sword.attackBoost = 10;
-        }
-        else if (tier == 2){
+        } else if (tier == 2){
             sword.name = "Steal Sword";
             sword.cost = 20;
             sword.attackBoost = 20;
@@ -20,14 +24,14 @@ public class ItemFactory {
         }
         return sword;
     }
-    public static Armor createArmor(int tier){
-        Armor armor = new Armor();
+
+    public static Armor createArmor(final int tier){
+        final Armor armor = new Armor();
         if (tier == 1){
             armor.name = "Wood Armor";
             armor.cost = 10;
             armor.defenseBoost = 10;
-        }
-        else if (tier == 2){
+        } else if (tier == 2){
             armor.name = "Steal Armor";
             armor.cost = 20;
             armor.defenseBoost = 20;
@@ -38,10 +42,11 @@ public class ItemFactory {
         }
         return armor;
     }
-    public static Potion createPotion(PotionType type){
+
+    public static Potion createPotion(final PotionType type){
         switch (type){
             case HEALTH -> {
-                Potion potion = new HealthPotion();
+                final Potion potion = new HealthPotion();
                 potion.name = "Healing Potion";
                 potion.cost = 10;
                 potion.effectValue = 30;
@@ -50,13 +55,15 @@ public class ItemFactory {
 
             }
             case STRENGTH -> {
-                Potion potion = new StrengthPotion();
+                final Potion potion = new StrengthPotion();
                 potion.name = "Strength Potion";
                 potion.cost = 10;
                 potion.effectValue = 10;
                 return potion;
             }
-            default -> {return null;}
+            default -> {
+                return null;
+            }
         }
     }
 }
