@@ -4,6 +4,8 @@ public class PlayerStatusDisplay implements GameObserver {
 
     @Override
     public void update(final String message) {
-        // TODO: implement
+        System.out.println("\n[Player Update]");
+        System.out.println(message);
     }
 }
+
