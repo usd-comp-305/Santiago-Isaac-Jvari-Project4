@@ -24,24 +24,36 @@ public class Dungeon {
     }
 
     public Encounter exploreDirection(final Direction direction) {
-        // TODO: implement
-        return null;
+        roomsExplored++;
+
+        final Enemy enemy;
+
+        if (rollBossEncounter()) {
+            enemy = enemyFactory.createBoss("Lich");
+        } else {
+            enemy = enemyFactory.createEnemy(getRandomEnemyType(), difficultyLevel);
+        }
+
+        return new Encounter(enemy, direction);
     }
 
 
     public void increaseDifficulty() {
-        difficultyLevel +=1;
+        difficultyLevel += 1;
         bossEncounterChance= bossEncounterChance / 2 + bossEncounterChance;
     }
 
 
     public boolean rollBossEncounter() {
-        // TODO: implement
-        return false;
+
+        return Math.random() < bossEncounterChance;
     }
 
     public String getHint(final Direction direction) {
-        return hintSystem.getDirectionalMessage(direction, null);
+        final Enemy enemy = enemyFactory.createEnemy(
+                getRandomEnemyType(), difficultyLevel);
+
+        return hintSystem.getHintForEnemy(enemy, direction);
     }
 
     public int getRoomsExplored() {
@@ -56,4 +68,13 @@ public class Dungeon {
         playerInside = !playerInside;
         return playerInside;
     }
+
+    private String getRandomEnemyType() {
+        final String[] enemies = {"slime", "zombie", "skeleton"};
+
+        final int index = (int) (Math.random() * enemies.length);
+
+        return enemies[index];
+    }
 }
+
