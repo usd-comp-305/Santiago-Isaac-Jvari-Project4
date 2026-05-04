@@ -22,7 +22,7 @@ public class CombatManager {
     }
 
     public void enemyTurn(final Enemy enemy, final Player player) {
-        player.takeDamage(enemy.getAttackPower());
+        enemy.attack(player);
     }
 
 
@@ -36,3 +36,4 @@ public class CombatManager {
         }
     }
 }
+
