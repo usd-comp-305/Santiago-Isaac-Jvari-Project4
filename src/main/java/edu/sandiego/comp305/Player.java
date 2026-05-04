@@ -6,9 +6,9 @@ public class Player {
 
     String name;
 
-    int health;
-
     int gold;
+
+    int health;
 
     Weapon weapon;
 
@@ -31,7 +31,7 @@ public class Player {
     }
 
     public void attack(final Enemy enemy, final int damage){
-//        enemy.takeDamage(damage);
+        enemy.takeDamage(damage);
     }
 
     public void takeDamage(final int damage){
@@ -42,11 +42,12 @@ public class Player {
         this.health += amount;
     }
 
-    public void buyItem(final Item item){
-        this.inventory.add(item);
+    public void addToInventory(final Item item){
+        inventory.add(item);
     }
 
     public void usePotion(final Potion potion){
+        potion.applyEffect(this);
     }
 
     public void equipWeapon(final Weapon weapon){
@@ -63,6 +64,14 @@ public class Player {
 
     public int getGold() {
         return gold;
+    }
+
+    public void increaseGold(final int amount){
+        this.gold += amount;
+    }
+
+    public void  decreaseGold(final int amount){
+        this.gold -= amount;
     }
 
     public Armor getArmor() {
