@@ -31,9 +31,11 @@ public abstract class Enemy {
     }
 
     public void attack(final Player player) {
-        final int totalAttack = attackPower + attackBonus;
+        int damage = attackPower + attackBonus;;
 
-        final int damage = attackStrategy.executeAttack(totalAttack);
+        if (attackStrategy != null) {
+            damage = attackStrategy.executeAttack(damage);
+        }
 
         player.takeDamage(damage);
 
