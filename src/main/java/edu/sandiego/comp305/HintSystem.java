@@ -11,7 +11,8 @@ public class HintSystem {
     public String getDirectionalMessage(final Direction direction,
             final String hint) {
 
-        return "To the " + direction.toString().toLowerCase() + ": " + hint;
+        return "To the " + direction.toString().toLowerCase() + " you hear " + hint;
     }
 }
+
 

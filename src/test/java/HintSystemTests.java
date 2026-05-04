@@ -7,41 +7,44 @@ public class HintSystemTests {
 
     @Test
     public void testGetHintForEnemyNotNull() {
-        HintSystem hintSystem = new HintSystem();
-        Enemy enemy = new Slime();
+       final HintSystem hintSystem = new HintSystem();
+        final Enemy enemy = new Slime();
 
-        String result = hintSystem.getHintForEnemy(enemy, Direction.FORWARD);
+        final String result = hintSystem.getHintForEnemy(enemy, Direction.FORWARD);
 
         assertNotNull(result);
     }
 
     @Test
     public void testGetHintIncludesEnemyHint() {
-        HintSystem hintSystem = new HintSystem();
-        Enemy enemy = new Skeleton();
+        final HintSystem hintSystem = new HintSystem();
+        final Enemy enemy = new Skeleton();
 
-        String result = hintSystem.getHintForEnemy(enemy, Direction.OUT);
+        final String result = hintSystem.getHintForEnemy(enemy, Direction.OUT);
 
         assertTrue(result.contains(enemy.getHint()));
     }
 
     @Test
     public void testGetHintIncludesDirection() {
-        HintSystem hintSystem = new HintSystem();
-        Enemy enemy = new Zombie();
+        final HintSystem hintSystem = new HintSystem();
+        final Enemy enemy = new Zombie();
 
-        String result = hintSystem.getHintForEnemy(enemy, Direction.RIGHT);
+        final String result = hintSystem.getHintForEnemy(enemy, Direction.RIGHT);
 
         assertTrue(result.toLowerCase().contains("right"));
     }
 
     @Test
     public void testDirectionalMessage() {
-        HintSystem hintSystem = new HintSystem();
+        final HintSystem hintSystem = new HintSystem();
 
-        String result = hintSystem.getDirectionalMessage(Direction.LEFT, "groaning");
+        final String result = hintSystem.getDirectionalMessage(
+                Direction.LEFT,
+                "groaning");
 
-        assertEquals("To the left: groaning", result);
+        assertEquals("To the left you hear groaning", result);
     }
 }
+
 
