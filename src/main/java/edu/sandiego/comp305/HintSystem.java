@@ -4,13 +4,14 @@ public class HintSystem {
 
     public String getHintForEnemy(final Enemy enemy,
             final Direction direction) {
-        // TODO: implement
-        return null;
+
+        return getDirectionalMessage(direction, enemy.getHint());
     }
 
     public String getDirectionalMessage(final Direction direction,
             final String hint) {
-        // TODO: implement
-        return null;
+
+        return "To the " + direction.toString().toLowerCase() + ": " + hint;
     }
 }
+

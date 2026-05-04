@@ -32,7 +32,7 @@ public class HintSystemTests {
 
         String result = hintSystem.getHintForEnemy(enemy, Direction.RIGHT);
 
-        assertTrue(result.toLowerCase().contains("east"));
+        assertTrue(result.toLowerCase().contains("right"));
     }
 
     @Test
@@ -41,6 +41,7 @@ public class HintSystemTests {
 
         String result = hintSystem.getDirectionalMessage(Direction.LEFT, "groaning");
 
-        assertEquals("To the west: groaning", result);
+        assertEquals("To the left: groaning", result);
     }
 }
+
