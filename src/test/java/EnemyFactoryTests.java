@@ -1,4 +1,4 @@
-import edu.sandiego.comp305.Enemy;
+import edu.sandiego.comp305.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,9 +6,9 @@ public class EnemyFactoryTests {
 
     @Test
     public void createEnemyReturnsSlime() {
-        EnemyFactory factory = new EnemyFactory();
+        final EnemyFactory factory = new EnemyFactory();
 
-        Enemy enemy = factory.createEnemy("slime");
+        final Enemy enemy = factory.createEnemy("slime",1);
 
         assertTrue(enemy instanceof Slime);
         assertEquals("sloshing", enemy.getHint());
@@ -16,9 +16,9 @@ public class EnemyFactoryTests {
 
     @Test
     public void createEnemyReturnsSkeleton() {
-        EnemyFactory factory = new EnemyFactory();
+        final EnemyFactory factory = new EnemyFactory();
 
-        Enemy enemy = factory.createEnemy("skeleton");
+        final Enemy enemy = factory.createEnemy("skeleton",1);
 
         assertTrue(enemy instanceof Skeleton);
         assertEquals("rattling", enemy.getHint());
@@ -26,13 +26,14 @@ public class EnemyFactoryTests {
 
     @Test
     public void createBossReturnsBossEnemy() {
-        EnemyFactory factory = new EnemyFactory();
+        final EnemyFactory factory = new EnemyFactory();
 
-        BossEnemy boss = factory.createBoss();
+        final BossEnemy boss = (BossEnemy) factory.createBoss("Lich");
 
         assertNotNull(boss);
-        assertTrue(boss instanceof BossEnemy);
     }
+
+
 
 }
 

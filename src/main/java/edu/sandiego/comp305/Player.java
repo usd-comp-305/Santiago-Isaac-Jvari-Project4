@@ -3,47 +3,76 @@ package edu.sandiego.comp305;
 import java.util.ArrayList;
 
 public class Player {
+
     String name;
+
     int health;
+
     int gold;
+
     Weapon weapon;
+
     Armor armor;
-    ArrayList<Item> inventory;
+
+    ArrayList<Item> inventory = new ArrayList<>();
+
     AttackStrategy attackStrategy;
 
-    public Player(String name, int health, int gold) {
+    public Player(final String name, final int health, final int gold) {
         this.name = name;
         this.health = health;
         this.gold = gold;
     }
+
     public Player() {
         this.name = "Player";
         this.health = 100;
         this.gold = 0;
     }
-    public void attack(Enemy enemy, int damage){
+
+    public void attack(final Enemy enemy, final int damage){
 //        enemy.takeDamage(damage);
     }
-    public void takeDamage(int damage){
+
+    public void takeDamage(final int damage){
         this.health -= damage;
     }
-    public void heal (int amount){
+
+    public void heal (final int amount){
         this.health += amount;
     }
-    public void buyItem(Item item){
 
+    public void buyItem(final Item item){
+        this.inventory.add(item);
     }
-    public void usePotion(Potion potion){
-    }
-    public void equipWeapon(Weapon weapon){
 
+    public void usePotion(final Potion potion){
     }
-    public void equipArmor(Armor armor){
 
+    public void equipWeapon(final Weapon weapon){
+        this.weapon = weapon;
     }
-    public void setAttackStrategy(AttackStrategy strategy){
 
+    public void equipArmor(final Armor armor){
+        this.armor = armor;
     }
+
+    public void setAttackStrategy(final AttackStrategy strategy){
+        this.attackStrategy = strategy;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public AttackStrategy getAttackStrategy() {
+        return attackStrategy;
+    }
+
     public boolean isAlive(){
         if (health <= 0){
             return false;
@@ -52,4 +81,3 @@ public class Player {
     }
 
 }
-

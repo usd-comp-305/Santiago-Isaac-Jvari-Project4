@@ -2,12 +2,14 @@ package edu.sandiego.comp305;
 
 public class HintSystem {
 
-    public String getHintForEnemy(Enemy enemy, Direction direction) {
+    public String getHintForEnemy(final Enemy enemy,
+            final Direction direction) {
         // TODO: implement
         return null;
     }
 
-    public String getDirectionalMessage(Direction direction, String hint) {
+    public String getDirectionalMessage(final Direction direction,
+            final String hint) {
         // TODO: implement
         return null;
     }

@@ -1,5 +1,5 @@
 package edu.sandiego.comp305;
 
 public interface AttackStrategy {
-    int executeAttack(int attackerPower);
+    public abstract int executeAttack(int attackerPower);
 }

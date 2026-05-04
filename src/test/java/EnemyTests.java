@@ -7,7 +7,7 @@ public class EnemyTests {
 
     @Test
     public void testTakeDamageReducesHealth() {
-        Enemy slime = new Slime();
+        final Enemy slime = new Slime();
 
         slime.takeDamage(10);
 
@@ -16,7 +16,7 @@ public class EnemyTests {
 
     @Test
     public void testEnemyDiesWhenHealthZero() {
-        Enemy slime = new Slime();
+        final Enemy slime = new Slime();
 
         slime.takeDamage(30);
 
@@ -25,7 +25,7 @@ public class EnemyTests {
 
     @Test
     public void testEnemyAliveWhenHealthAboveZero() {
-        Enemy slime = new Slime();
+        final Enemy slime = new Slime();
 
         slime.takeDamage(10);
 
@@ -34,7 +34,7 @@ public class EnemyTests {
 
     @Test
     public void testEnemyHint() {
-        Enemy slime = new Slime();
+        final Enemy slime = new Slime();
 
         assertEquals("sloshing", slime.getHint());
     }
