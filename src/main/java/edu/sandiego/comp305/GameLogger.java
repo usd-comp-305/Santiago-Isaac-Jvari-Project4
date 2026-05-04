@@ -4,6 +4,7 @@ public class GameLogger implements GameObserver {
 
     @Override
     public void update(final String message) {
-        // TODO: implement
+        System.out.println(message);
     }
 }
+
