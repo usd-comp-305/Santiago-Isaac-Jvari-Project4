@@ -7,7 +7,7 @@ public class HintSystemTests {
 
     @Test
     public void testGetHintForEnemyNotNull() {
-       final HintSystem hintSystem = new HintSystem();
+        final HintSystem hintSystem = new HintSystem();
         final Enemy enemy = new Slime();
 
         final String result = hintSystem.getHintForEnemy(
