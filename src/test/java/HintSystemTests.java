@@ -10,7 +10,9 @@ public class HintSystemTests {
        final HintSystem hintSystem = new HintSystem();
         final Enemy enemy = new Slime();
 
-        final String result = hintSystem.getHintForEnemy(enemy, Direction.FORWARD);
+        final String result = hintSystem.getHintForEnemy(
+                enemy,
+                Direction.FORWARD);
 
         assertNotNull(result);
     }
@@ -20,7 +22,9 @@ public class HintSystemTests {
         final HintSystem hintSystem = new HintSystem();
         final Enemy enemy = new Skeleton();
 
-        final String result = hintSystem.getHintForEnemy(enemy, Direction.OUT);
+        final String result = hintSystem.getHintForEnemy(
+                enemy,
+                Direction.OUT);
 
         assertTrue(result.contains(enemy.getHint()));
     }
@@ -30,7 +34,9 @@ public class HintSystemTests {
         final HintSystem hintSystem = new HintSystem();
         final Enemy enemy = new Zombie();
 
-        final String result = hintSystem.getHintForEnemy(enemy, Direction.RIGHT);
+        final String result = hintSystem.getHintForEnemy(
+                enemy,
+                Direction.RIGHT);
 
         assertTrue(result.toLowerCase().contains("right"));
     }
@@ -43,7 +49,9 @@ public class HintSystemTests {
                 Direction.LEFT,
                 "groaning");
 
-        assertEquals("To the left you hear groaning", result);
+        assertEquals(
+                "To the left you hear groaning",
+                result);
     }
 }
 
