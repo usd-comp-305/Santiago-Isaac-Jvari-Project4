@@ -5,9 +5,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
-
     @Test
     void attack() {
+        final Player player = new Player("Isaac", 10, 0);
+        final EnemyFactory factory = new EnemyFactory();
+        final Enemy enemy = factory.createEnemy("slime",0);
+        assertEquals(30,enemy.health);
+        player.attack(enemy,30);
+        assertEquals(0,enemy.health);
     }
 
     @Test
@@ -28,23 +33,85 @@ class PlayerTest {
     }
 
     @Test
-    void buyItem() {
+    void testGetGold() {
+        final int gold = 10;
+        final Player player = new Player("Isaac", 10, gold);
+        assertEquals(gold, player.getGold());
+
     }
 
     @Test
-    void usePotion() {
+    void testIncreaseGold() {
+        final Player player = new Player("Isaac", 10, 0);
+        player.increaseGold(10);
+        assertEquals(10, player.getGold());
+    }
+
+    @Test
+    void testDecreaseGold() {
+        final Player player = new Player("Isaac", 10, 10);
+        player.decreaseGold(10);
+        assertEquals(0, player.getGold());
+    }
+
+
+    @Test
+    void useHealthPotion() {
+        final Player player = new Player("Isaac", 10, 0);
+        final Potion health = ItemFactory.createPotion(PotionType.HEALTH);
+        final int expectedHealth = 40;
+        player.usePotion(health);
+        assertEquals(expectedHealth, player.health);
+    }
+
+    @Test
+    void addToInventory() {
+        final Player player = new Player("Isaac", 10, 0);
+        final Potion health = ItemFactory.createPotion(PotionType.HEALTH);
+        player.addToInventory(health);
+        assertTrue(player.inventory.contains(health));
     }
 
     @Test
     void equipWeapon() {
+        final Player player = new Player("Isaac", 10, 0);
+        final Weapon sword = ItemFactory.createSwordWeapon(1);
+        player.equipWeapon(sword);
+        assertTrue(player.weapon == sword);
+
     }
 
     @Test
     void equipArmor() {
+        final Player player = new Player("Isaac", 10, 0);
+        final Armor armor = ItemFactory.createArmor(1);
+        player.equipArmor(armor);
+        assertTrue(player.armor == armor);
+    }
+
+    @Test
+    void getArmor() {
+        final Player player = new Player("Isaac", 10, 0);
+        final Armor armor = ItemFactory.createArmor(1);
+        player.equipArmor(armor);
+        assertTrue(player.armor == player.getArmor());
     }
 
     @Test
     void setAttackStrategy() {
+        final Player player = new Player("Isaac", 10, 0);
+        final AttackStrategy strategy = new BasicAttack();
+        player.setAttackStrategy(strategy);
+        assertEquals(strategy, player.attackStrategy);
+
+    }
+
+    @Test
+    void getAttackStrategy(){
+        final Player player = new Player("Isaac", 10, 0);
+        final AttackStrategy strategy = new BasicAttack();
+        player.setAttackStrategy(strategy);
+        assertTrue(strategy == player.getAttackStrategy());
     }
 
     @Test
