@@ -1,5 +1,8 @@
 package edu.sandiego.comp305;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Dungeon {
 
     int difficultyLevel;
@@ -14,31 +17,44 @@ public class Dungeon {
 
     HintSystem hintSystem;
 
+    Map<Direction, Encounter> currentEncounters;
+
     public Dungeon() {
-        this.difficultyLevel = 1;
+        this.difficultyLevel = 0;
         this.roomsExplored = 0;
         this.bossEncounterChance = 0.1;
         this.enemyFactory = new EnemyFactory();
         this.hintSystem = new HintSystem();
         this.playerInside = false;
+        this.currentEncounters = new HashMap<>();
     }
 
     public Encounter exploreDirection(final Direction direction) {
         roomsExplored++;
 
-        final boolean bossEncounter = rollBossEncounter();
+        final Encounter chosenEncounter = currentEncounters.get(direction);
 
-        final Enemy enemy;
+        currentEncounters = generateDirectionEncounters();
 
-        if (bossEncounter) {
-            enemy = enemyFactory.createBoss(getRandomBossType());
-        } else {
-            enemy = enemyFactory.createEnemy(
-                    getRandomEnemyType(),
-                    difficultyLevel);
+        return chosenEncounter;
+    }
+
+    public Map<Direction, Encounter> generateDirectionEncounters() {
+        final Map<Direction, Encounter> encounters = new HashMap<>();
+
+        final Direction[] directions = {
+                Direction.LEFT,
+                Direction.FORWARD,
+                Direction.RIGHT
+        };
+
+        for (final Direction direction : directions) {
+            if (rollEncounter()) {
+                encounters.put(direction, createEncounter());
+            }
         }
 
-        return new Encounter(enemy, bossEncounter);
+        return encounters;
     }
 
 
@@ -64,6 +80,10 @@ public class Dungeon {
         return roomsExplored;
     }
 
+    public int getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
     public EnemyFactory getEnemyFactory() {
         return enemyFactory;
     }
@@ -71,6 +91,22 @@ public class Dungeon {
     public boolean inDungeon() {
         playerInside = !playerInside;
         return playerInside;
+    }
+
+    private Encounter createEncounter() {
+        final boolean bossEncounter = rollBossEncounter();
+
+        final Enemy enemy;
+
+        if (bossEncounter) {
+            enemy = enemyFactory.createBoss(getRandomBossType());
+        } else {
+            enemy = enemyFactory.createEnemy(
+                    getRandomEnemyType(),
+                    difficultyLevel);
+        }
+
+        return new Encounter(enemy, bossEncounter);
     }
 
     private String getRandomEnemyType() {
@@ -88,6 +124,11 @@ public class Dungeon {
 
         return bossTypes[index];
     }
+
+    public boolean rollEncounter() {
+        return Math.random() < 0.6;
+    }
 }
+
 
 
