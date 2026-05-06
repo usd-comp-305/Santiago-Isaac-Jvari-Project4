@@ -13,7 +13,7 @@ public class Shop {
         avaliableItems.add(item);
     }
 
-    public boolean buyWeaponUpgrade(
+    public boolean buyWeaponBoost(
             final int boostAmount,
             final int price,
             final Player player){
@@ -28,6 +28,17 @@ public class Shop {
         }
         return false;
     }
+
+    public void buyNewWeapon(final Player player){
+        final Weapon weapon = player.weapon;
+        final int weaponTier = weapon.getTier();
+        if (weapon.getTier() < 3){
+            weapon.setTier(2);
+        } else{
+            System.out.println("You reached the Max Upgrades on the Sword!");
+        }
+    }
+
 
     private boolean canPlayerAfford(final Player player, final int price){
         if (player.gold >= price) {

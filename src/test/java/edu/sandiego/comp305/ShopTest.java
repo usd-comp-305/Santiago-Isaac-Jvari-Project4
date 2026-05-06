@@ -18,7 +18,7 @@ class ShopTest {
         final Weapon sword = ItemFactory.createSwordWeapon(1);
         player.equipWeapon(sword);
 
-        final boolean result = shop.buyWeaponUpgrade(10, 10, player);
+        final boolean result = shop.buyWeaponBoost(10, 10, player);
 
         assertTrue(result);
         assertEquals(0, player.getGold());
@@ -30,8 +30,19 @@ class ShopTest {
         final Shop shop = new Shop();
         final Player player = new Player("Isaac",10,10);
         assertTrue(player.gold == 10);
-        assertFalse(shop.buyWeaponUpgrade(10,10,player));
+        assertFalse(shop.buyWeaponBoost(10,10,player));
         assertTrue(player.gold == 10);
+    }
+
+    @Test
+    void buyNewWeapon(){
+        final Shop shop = new Shop();
+        final Player player = new Player("Isaac",10,20);
+        final Weapon sword = ItemFactory.createSwordWeapon(1);
+        System.out.println(sword.name); // wood
+        player.equipWeapon(sword);
+        shop.buyNewWeapon(player);
+        System.out.println(sword.name);// steel
     }
 
     @Test
