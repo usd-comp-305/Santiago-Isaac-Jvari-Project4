@@ -26,15 +26,19 @@ public class Dungeon {
     public Encounter exploreDirection(final Direction direction) {
         roomsExplored++;
 
+        final boolean bossEncounter = rollBossEncounter();
+
         final Enemy enemy;
 
-        if (rollBossEncounter()) {
-            enemy = enemyFactory.createBoss("Lich");
+        if (bossEncounter) {
+            enemy = enemyFactory.createBoss(getRandomBossType());
         } else {
-            enemy = enemyFactory.createEnemy(getRandomEnemyType(), difficultyLevel);
+            enemy = enemyFactory.createEnemy(
+                    getRandomEnemyType(),
+                    difficultyLevel);
         }
 
-        return new Encounter(enemy, direction);
+        return new Encounter(enemy, bossEncounter);
     }
 
 
@@ -76,5 +80,14 @@ public class Dungeon {
 
         return enemies[index];
     }
+
+    private String getRandomBossType() {
+        final String[] bossTypes = {"Lich", "Minotaur", "ZombieKing"};
+
+        final int index = (int) (Math.random() * bossTypes.length);
+
+        return bossTypes[index];
+    }
 }
+
 
