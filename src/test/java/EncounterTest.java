@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EncounterTest {
 
     @Test
-    public void testEncounterStoresEnemyName() {
+    public void EncounterStoresEnemyName() {
         final Encounter encounter = new Encounter(
                 "slime", false);
 
@@ -16,7 +16,7 @@ public class EncounterTest {
     }
 
     @Test
-    public void testRegularEncounterIsNotBossEncounter() {
+    public void RegularEncounterIsNotBossEncounter() {
         final Encounter encounter = new Encounter(
                 "zombie", false);
 
@@ -24,7 +24,7 @@ public class EncounterTest {
     }
 
     @Test
-    public void testBossEncounterIsBossEncounter() {
+    public void BossEncounterIsBossEncounter() {
         final Encounter encounter = new Encounter(
                 "Lich", true);
 
