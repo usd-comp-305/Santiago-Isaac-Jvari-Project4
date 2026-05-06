@@ -2,17 +2,17 @@ package edu.sandiego.comp305;
 
 public class Encounter {
 
-    private final Enemy enemy;
+    private final String enemyName;
 
     private final boolean bossEncounter;
 
-    public Encounter(final Enemy enemy, final boolean bossEncounter) {
-        this.enemy = enemy;
+    public Encounter(final String enemyName, final boolean bossEncounter) {
+        this.enemyName = enemyName;
         this.bossEncounter = bossEncounter;
     }
 
-    public Enemy getEnemy() {
-        return enemy;
+    public String getEnemyName() {
+        return enemyName;
     }
 
     public boolean isBossEncounter() {

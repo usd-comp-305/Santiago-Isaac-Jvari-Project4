@@ -7,28 +7,26 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EncounterTest {
 
     @Test
-    public void testEncounterStoresEnemy() {
-        final Enemy slime = new Slime();
+    public void testEncounterStoresEnemyName() {
+        final Encounter encounter = new Encounter(
+                "slime", false);
 
-        final Encounter encounter = new Encounter(slime, false);
-
-        assertEquals(slime, encounter.getEnemy());
+        assertEquals("slime",
+                encounter.getEnemyName());
     }
 
     @Test
     public void testRegularEncounterIsNotBossEncounter() {
-        final Enemy slime = new Slime();
-
-        final Encounter encounter = new Encounter(slime, false);
+        final Encounter encounter = new Encounter(
+                "zombie", false);
 
         assertFalse(encounter.isBossEncounter());
     }
 
     @Test
     public void testBossEncounterIsBossEncounter() {
-        final Enemy lich = new Lich();
-
-        final Encounter encounter = new Encounter(lich, true);
+        final Encounter encounter = new Encounter(
+                "Lich", true);
 
         assertTrue(encounter.isBossEncounter());
     }
