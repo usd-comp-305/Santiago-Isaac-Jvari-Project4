@@ -1,6 +1,7 @@
 package edu.sandiego.comp305;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Dungeon {
@@ -51,11 +52,10 @@ public class Dungeon {
     public Map<Direction, Encounter> generateDirectionEncounters() {
         final Map<Direction, Encounter> encounters = new HashMap<>();
 
-        final Direction[] directions = {
+        final List<Direction> directions = List.of(
                 Direction.LEFT,
                 Direction.FORWARD,
-                Direction.RIGHT
-        };
+                Direction.RIGHT);
 
         for (final Direction direction : directions) {
             if (rollEncounter()) {
