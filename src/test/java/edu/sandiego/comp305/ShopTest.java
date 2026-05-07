@@ -2,12 +2,15 @@ package edu.sandiego.comp305;
 
 import org.junit.jupiter.api.Test;
 
+import java.net.FileNameMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShopTest {
 
     @Test
     void displayItems() {
+
     }
 
     @Test
@@ -41,31 +44,32 @@ class ShopTest {
         final Weapon sword = ItemFactory.createSwordWeapon(1);
         System.out.println(sword.name); // wood
         player.equipWeapon(sword);
-        shop.buyNewWeapon(player);
-        System.out.println(sword.name);// steel
+        shop.buyNewWeapon(player,sword);
     }
 
     @Test
     void buyArmorUpGrade(){
-        final Shop shop = new Shop();
-//        final Player player = new Player();
+        final Shop shop = ShopFactory.createDefualtShop();;
+        final Player player = new Player("Isaac",10,10);
         final Armor armor = ItemFactory.createArmor(1);
-        shop.buyArmorUpgrade(10,armor);
+        shop.buyArmorUpgrade(player,10,armor);
+        assertTrue(armor.defenseBoost == 20);
+        assertEquals(0, player.getGold());
+
+
     }
 
     @Test
     void buyPotionHealth(){
         final Shop shop = new Shop();
-//        final Player player = new Player();
-
+        final Player player = new Player("Isaac",10,10);
         final Potion health = ItemFactory.createPotion(PotionType.HEALTH);
-
-        shop.buyPotion(10,health);
-    }
-
-
-    @Test
-    void buyArmorUpgrade() {
+        final int price = 10;
+        shop.addItem(health);
+        assertTrue(shop.displayItems().contains(health));
+        shop.buyPotion(player,price,health);
+        assertTrue(player.inventory.contains(health));
+        assertEquals(0, player.getGold());
     }
 
     @Test
