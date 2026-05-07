@@ -6,4 +6,5 @@ public class Armor extends Item{
     public int getDefenseBoost() {
         return defenseBoost;
     }
+    public int maxDefenseBoost = 30;
 }

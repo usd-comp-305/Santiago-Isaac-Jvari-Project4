@@ -20,5 +20,7 @@ public class Weapon extends Item{
     public int getAttackBoost(){
         return attackBoost;
     }
+
+
 }
 
