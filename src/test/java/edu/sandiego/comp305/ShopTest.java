@@ -2,7 +2,6 @@ package edu.sandiego.comp305;
 
 import org.junit.jupiter.api.Test;
 
-import java.net.FileNameMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,7 +48,7 @@ class ShopTest {
 
     @Test
     void buyArmorUpGrade(){
-        final Shop shop = ShopFactory.createDefualtShop();;
+        final Shop shop = ShopFactory.createDefualtShop();
         final Player player = new Player("Isaac",10,10);
         final Armor armor = ItemFactory.createArmor(1);
         shop.buyArmorUpgrade(player,10,armor);
