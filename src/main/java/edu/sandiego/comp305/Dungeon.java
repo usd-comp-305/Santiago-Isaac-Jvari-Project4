@@ -69,7 +69,7 @@ public class Dungeon {
 
     public void increaseDifficulty() {
         difficultyLevel += 1;
-        bossEncounterChance *=BOSS_CHANCE_INCREASE_MULTIPLIER;
+        bossEncounterChance *= BOSS_CHANCE_INCREASE_MULTIPLIER;
     }
 
 
