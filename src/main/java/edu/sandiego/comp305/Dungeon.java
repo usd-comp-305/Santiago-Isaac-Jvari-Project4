@@ -51,8 +51,10 @@ public class Dungeon {
     public Map<Direction, Encounter> generateDirectionEncounters() {
         final Map<Direction, Encounter> encounters = new HashMap<>();
 
-        final Direction[] directions = {Direction.LEFT,
-                Direction.FORWARD, Direction.RIGHT
+        final Direction[] directions = {
+                 Direction.LEFT,
+                 Direction.FORWARD,
+                 Direction.RIGHT
         };
 
         for (final Direction direction : directions) {
