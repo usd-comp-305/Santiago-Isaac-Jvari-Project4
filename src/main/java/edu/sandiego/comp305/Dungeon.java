@@ -4,6 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Dungeon {
+    private static final int STARTING_DIFFICULTY = 0;
+
+    private static final int STARTING_ROOMS_EXPLORED = 0;
+
+    private static final double STARTING_BOSS_CHANCE = 0.1;
+
+    private static final double ENCOUNTER_CHANCE = 0.6;
+
+    private static final double BOSS_CHANCE_INCREASE_MULTIPLIER = 1.5;
 
     int difficultyLevel;
 
@@ -20,9 +29,9 @@ public class Dungeon {
     Map<Direction, Encounter> currentEncounters;
 
     public Dungeon() {
-        this.difficultyLevel = 0;
-        this.roomsExplored = 0;
-        this.bossEncounterChance = 0.1;
+        this.difficultyLevel = STARTING_DIFFICULTY;
+        this.roomsExplored = STARTING_ROOMS_EXPLORED;
+        this.bossEncounterChance = STARTING_BOSS_CHANCE;
         this.enemyFactory = new EnemyFactory();
         this.hintSystem = new HintSystem();
         this.playerInside = false;
@@ -60,7 +69,7 @@ public class Dungeon {
 
     public void increaseDifficulty() {
         difficultyLevel += 1;
-        bossEncounterChance= bossEncounterChance / 2 + bossEncounterChance;
+        bossEncounterChance *=BOSS_CHANCE_INCREASE_MULTIPLIER;
     }
 
 
@@ -70,8 +79,21 @@ public class Dungeon {
     }
 
     public String getHint(final Direction direction) {
-        final Enemy enemy = enemyFactory.createEnemy(
-                getRandomEnemyType(), difficultyLevel);
+        final Encounter encounter = currentEncounters.get(direction);
+
+        if (encounter == null) {
+            return "This path seems quiet.";
+        }
+
+        final Enemy enemy;
+
+        if (encounter.isBossEncounter()) {
+            enemy = enemyFactory.createBoss(encounter.getEnemyName());
+        } else {
+            enemy = enemyFactory.createEnemy(
+                    encounter.getEnemyName(),
+                    difficultyLevel);
+        }
 
         return hintSystem.getHintForEnemy(enemy, direction);
     }
@@ -89,24 +111,25 @@ public class Dungeon {
     }
 
     public boolean inDungeon() {
-        playerInside = !playerInside;
         return playerInside;
+    }
+
+    public void enterDungeon() {
+        playerInside = true;
+    }
+
+    public void exitDungeon() {
+        playerInside = false;
     }
 
     private Encounter createEncounter() {
         final boolean bossEncounter = rollBossEncounter();
 
-        final Enemy enemy;
-
         if (bossEncounter) {
-            enemy = enemyFactory.createBoss(getRandomBossType());
-        } else {
-            enemy = enemyFactory.createEnemy(
-                    getRandomEnemyType(),
-                    difficultyLevel);
+            return new Encounter(getRandomBossType(), true);
         }
 
-        return new Encounter(enemy, bossEncounter);
+        return new Encounter(getRandomEnemyType(), false);
     }
 
     private String getRandomEnemyType() {
@@ -126,9 +149,10 @@ public class Dungeon {
     }
 
     public boolean rollEncounter() {
-        return Math.random() < 0.6;
+        return Math.random() < ENCOUNTER_CHANCE;
     }
 }
+
 
 
 

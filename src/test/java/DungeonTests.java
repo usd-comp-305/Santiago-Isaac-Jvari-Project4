@@ -1,5 +1,8 @@
 import edu.sandiego.comp305.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -29,7 +32,7 @@ public class DungeonTests {
 
         dungeon.increaseDifficulty();
 
-        assertEquals(2, dungeon.getDifficultyLevel());
+        assertEquals(1, dungeon.getDifficultyLevel());
     }
 
     @Test
@@ -39,9 +42,14 @@ public class DungeonTests {
         assertNotNull(dungeon.generateDirectionEncounters());
     }
 
+    @Test
+    public void generateDirectionEncountersReturnsMap() {
+        final Dungeon dungeon = new Dungeon();
 
+        final Map<Direction, Encounter> encounters =
+                dungeon.generateDirectionEncounters();
 
-
-
-
+        assertNotNull(encounters);
+    }
 }
+
