@@ -107,4 +107,12 @@ public class Player {
         return true;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public int getAttackPower() {
+        return attackPower;
+    }
 }
+
