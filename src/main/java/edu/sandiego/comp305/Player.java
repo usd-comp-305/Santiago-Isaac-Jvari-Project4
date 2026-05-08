@@ -20,11 +20,14 @@ public class Player {
 
     int attackPower;
 
-    public Player(final String name, final int health, final int gold) {
+    public Player(final String name,
+                  final int health,
+                  final int gold,
+                  final int attackPower) {
         this.name = name;
         this.health = health;
         this.gold = gold;
-        this.attackPower = 5;
+        this.attackPower = attackPower;
     }
 
     public Player() {
@@ -33,6 +36,7 @@ public class Player {
         this.gold = 0;
         this.attackPower = 5;
     }
+
 
     public void attack(final Enemy enemy) {
         int damage = attackPower;
@@ -44,8 +48,8 @@ public class Player {
         if (attackStrategy != null) {
             damage = attackStrategy.executeAttack(damage);
         }
-
         enemy.takeDamage(damage);
+
     }
 
     public void takeDamage(final int damage){
