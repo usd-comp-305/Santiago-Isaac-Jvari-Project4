@@ -11,4 +11,5 @@ class ShopFactoryTest {
         assertEquals(7, defualtShop.displayItems().size());
     }
 
+    
 }
