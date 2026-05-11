@@ -15,7 +15,7 @@ public final class ItemFactory {
             sword.setAttackBoost(10);
             sword.setTier(1);
         } else if (tier == 2){
-            sword.name = "Steal Sword";
+            sword.name = "Steel Sword";
             sword.cost = 20;
             sword.setAttackBoost(20);
             sword.setTier(2);
