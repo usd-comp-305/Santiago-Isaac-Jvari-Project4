@@ -13,12 +13,12 @@ class ShopTest {
     @Test
     void buyWeaponUpgrade() {
         final Shop shop = new Shop();
-        final Player player = new Player("Isaac",10,10,10);
+        final Player player = new Player("Isaac", 10, 10, 10);
 
         final Weapon sword = ItemFactory.createSwordWeapon(1);
         player.equipWeapon(sword);
 
-        final boolean result = shop.buyWeaponUpgrade(10, 10, player);
+        final boolean result = shop.buyWeaponBoost(10, 10, player);
 
         assertTrue(result);
         assertEquals(0, player.getGold());
@@ -26,32 +26,29 @@ class ShopTest {
     }
 
     @Test
-    void buyWeaponUpGradeNoWeapon(){
+    void buyWeaponUpGradeNoWeapon() {
         final Shop shop = new Shop();
-        final Player player = new Player("Isaac",10,10,10);
+        final Player player = new Player("Isaac", 10, 10, 10);
         assertTrue(player.gold == 10);
-        assertFalse(shop.buyWeaponUpgrade(10,10,player));
+        assertFalse(shop.buyWeaponBoost(10, 10, player));
         assertTrue(player.gold == 10);
     }
 
     @Test
-    void buyArmorUpGrade(){
+    void buyArmorUpGrade() {
         final Shop shop = new Shop();
-//        final Player player = new Player();
+        final Player player = new Player("Isaac", 10, 10, 10);
         final Armor armor = ItemFactory.createArmor(1);
-        shop.buyArmorUpgrade(10,armor);
+        shop.buyArmorUpgrade(player, 10, armor);
     }
 
     @Test
-    void buyPotionHealth(){
+    void buyPotionHealth() {
         final Shop shop = new Shop();
-//        final Player player = new Player();
-
+        final Player player = new Player("Isaac", 10, 10, 10);
         final Potion health = ItemFactory.createPotion(PotionType.HEALTH);
-
-        shop.buyPotion(10,health);
+        shop.buyPotion(player, 10, health);
     }
-
 
     @Test
     void buyArmorUpgrade() {
@@ -60,6 +57,5 @@ class ShopTest {
     @Test
     void buyPotion() {
     }
-
 
 }
