@@ -16,7 +16,7 @@ class ItemFactoryTest {
     })
     void createWeapon_AttackBoost(final int tier, final int expectedBoost) {
         final Weapon w = ItemFactory.createSwordWeapon(tier);
-        assertEquals(expectedBoost,w.attackBoost);
+        assertEquals(expectedBoost,w.getAttackBoost());
     }
 
     @ParameterizedTest

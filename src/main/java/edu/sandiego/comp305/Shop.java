@@ -19,7 +19,9 @@ public class Shop {
             final Player player){
         if (canPlayerAfford(player,price)){
             if (player.weapon != null){
-                player.weapon.attackBoost += boostAmount;
+                player.weapon.setAttackBoost(
+                        player.weapon.getAttackBoost()
+                                + boostAmount);
                 player.decreaseGold(price);
                 return true;
             }else{

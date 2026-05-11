@@ -22,7 +22,7 @@ class ShopTest {
 
         assertTrue(result);
         assertEquals(0, player.getGold());
-        assertEquals(20, player.weapon.attackBoost);
+        assertEquals(20, player.weapon.getAttackBoost());
     }
 
     @Test
