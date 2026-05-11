@@ -1,6 +1,5 @@
 package edu.sandiego.comp305;
 
-import java.util.ArrayList;
 
 public final class ShopFactory {
     private ShopFactory() {
@@ -8,7 +7,7 @@ public final class ShopFactory {
     }
 
     public static Shop createDefualtShop(){
-        Shop shop = new Shop();
+        final Shop shop = new Shop();
         for(int i = 1; i < 4; i++){
             shop.addItem(ItemFactory.createSwordWeapon(i));
             shop.addItem(ItemFactory.createArmor(i));
@@ -21,7 +20,7 @@ public final class ShopFactory {
     
 
     public static Shop emptyShop(){
-        Shop shop = new Shop();
+        final Shop shop = new Shop();
         return shop;
     }
 

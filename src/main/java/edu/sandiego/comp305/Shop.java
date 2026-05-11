@@ -68,13 +68,17 @@ public class Shop {
         return false;
     }
 
-    public void buyArmorUpgrade(final Player player, final int price, final Armor armor){
+    public void buyArmorUpgrade(
+            final Player player,
+            final int price,
+            final Armor armor){
         if (canPlayerAfford(player,price) && !isArmorMaxed(armor)){
             player.decreaseGold(price);
             armor.defenseBoost += 10;
         }
 
     }
+
     private boolean isArmorMaxed(final Armor armor){
         if (armor.defenseBoost >= armor.maxDefenseBoost){
             return true;
@@ -83,8 +87,11 @@ public class Shop {
     }
 
 
-    public void buyPotion(final Player player, final int price, final Potion potion){
-        if(avaliableItems.contains(potion) && canPlayerAfford(player,price)){
+    public void buyPotion(final Player player,
+                          final int price,
+                          final Potion potion){
+        if(avaliableItems.contains(potion) &&
+                canPlayerAfford(player,price)){
             this.removeItem(potion);
             player.decreaseGold(price);
             player.addToInventory(potion);
