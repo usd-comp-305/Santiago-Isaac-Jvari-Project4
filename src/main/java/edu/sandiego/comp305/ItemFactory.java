@@ -35,7 +35,7 @@ public final class ItemFactory {
             armor.cost = 10;
             armor.defenseBoost = 10;
         } else if (tier == 2){
-            armor.name = "Steal Armor";
+            armor.name = "Steel Armor";
             armor.cost = 20;
             armor.defenseBoost = 20;
         }  else if (tier == 3) {
