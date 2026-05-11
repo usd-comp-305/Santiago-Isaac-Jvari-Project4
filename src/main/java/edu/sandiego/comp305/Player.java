@@ -18,20 +18,38 @@ public class Player {
 
     AttackStrategy attackStrategy;
 
-    public Player(final String name, final int health, final int gold) {
+    int attackPower;
+
+    public Player(final String name,
+                  final int health,
+                  final int gold,
+                  final int attackPower) {
         this.name = name;
         this.health = health;
         this.gold = gold;
+        this.attackPower = attackPower;
     }
 
     public Player() {
         this.name = "Player";
         this.health = 100;
         this.gold = 0;
+        this.attackPower = 5;
     }
 
-    public void attack(final Enemy enemy, final int damage){
+
+    public void attack(final Enemy enemy) {
+        int damage = attackPower;
+
+        if (weapon != null) {
+            damage += weapon.getAttackBoost();
+        }
+
+        if (attackStrategy != null) {
+            damage = attackStrategy.executeAttack(damage);
+        }
         enemy.takeDamage(damage);
+
     }
 
     public void takeDamage(final int damage){
@@ -51,7 +69,11 @@ public class Player {
     }
 
     public void equipWeapon(final Weapon weapon){
-        this.weapon = weapon;
+        final Weapon copy = new Weapon();
+        copy.setAttackBoost(weapon.getAttackBoost());
+        copy.setTier(weapon.getTier());
+        this.weapon = copy;
+
     }
 
     public void equipArmor(final Armor armor){
@@ -89,4 +111,12 @@ public class Player {
         return true;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public int getAttackPower() {
+        return attackPower;
+    }
 }
+

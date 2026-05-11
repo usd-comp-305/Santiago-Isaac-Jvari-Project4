@@ -3,7 +3,16 @@ package edu.sandiego.comp305;
 import java.util.ArrayList;
 
 public class Shop {
-    private ArrayList<Item> avaliableItems = new ArrayList<>();
+    private ArrayList<Item> avaliableItems;
+
+    public Shop() {
+        this.avaliableItems = new ArrayList<>();
+    }
+
+    public Shop(final Shop other){
+        this.avaliableItems = new ArrayList<>(other.avaliableItems);
+    }
+
 
     public ArrayList<Item> displayItems(){
         return new ArrayList<>(avaliableItems);
@@ -27,7 +36,9 @@ public class Shop {
             final Player player){
         if (canPlayerAfford(player,price)){
             if (player.weapon != null){
-                player.weapon.attackBoost += boostAmount;
+                player.weapon.setAttackBoost(
+                        player.weapon.getAttackBoost()
+                                + boostAmount);
                 player.decreaseGold(price);
                 return true;
             }else{
