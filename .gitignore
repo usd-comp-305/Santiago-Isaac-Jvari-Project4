@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/macos,gradle,java,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,gradle,java,intellij
 
+.idea/
+
 ### Intellij ###
 .idea/
 *.iml

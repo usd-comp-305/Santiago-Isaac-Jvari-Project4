@@ -42,7 +42,7 @@ public class Player {
         int damage = attackPower;
 
         if (weapon != null) {
-            damage += weapon.attackBoost;
+            damage += weapon.getAttackBoost();
         }
 
         if (attackStrategy != null) {
@@ -69,7 +69,11 @@ public class Player {
     }
 
     public void equipWeapon(final Weapon weapon){
-        this.weapon = weapon;
+        final Weapon copy = new Weapon();
+        copy.setAttackBoost(weapon.getAttackBoost());
+        copy.setTier(weapon.getTier());
+        this.weapon = copy;
+
     }
 
     public void equipArmor(final Armor armor){

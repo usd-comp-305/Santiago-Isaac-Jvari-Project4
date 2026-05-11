@@ -3,6 +3,8 @@ package edu.sandiego.comp305;
 public class StrengthPotion extends Potion{
     @Override
     public void applyEffect(final Player player ) {
-        player.weapon.attackBoost += effectValue;
+        player.weapon.setAttackBoost(
+                player.weapon.getAttackBoost()
+                        + effectValue);
     }
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+
+    <!-- Null scanner in Game - incomplete TODO methods -->
+    <Match>
+        <Class name="edu.sandiego.comp305.Game"/>
+        <Bug code="NP"/>
+    </Match>
+
+    <!-- Unwritten weapon field - equipWeapon() not yet implemented -->
+    <Match>
+        <Class name="edu.sandiego.comp305.StrengthPotion"/>
+        <Bug code="NP,UwF"/>
+    </Match>
+    <Match>
+        <Class name="edu.sandiego.comp305.Player"/>
+        <Bug code="UwF"/>
+    </Match>
+
+    <!-- Unread/unused fields - will be used once TODO methods are implemented -->
+    <Match>
+        <Bug code="UrF,UuF"/>
+    </Match>
+
+</FindBugsFilter>

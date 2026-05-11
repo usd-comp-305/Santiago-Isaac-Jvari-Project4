@@ -12,15 +12,18 @@ public final class ItemFactory {
         if (tier == 1){
             sword.name = "Wood Sword";
             sword.cost = 10;
-            sword.attackBoost = 10;
+            sword.setAttackBoost(10);
+            sword.setTier(1);
         } else if (tier == 2){
-            sword.name = "Steal Sword";
+            sword.name = "Steel Sword";
             sword.cost = 20;
-            sword.attackBoost = 20;
+            sword.setAttackBoost(20);
+            sword.setTier(2);
         } else if (tier == 3) {
             sword.name = "Diamond Sword";
             sword.cost = 30;
-            sword.attackBoost = 30;
+            sword.setAttackBoost(30);
+            sword.setTier(3);
         }
         return sword;
     }
@@ -32,7 +35,7 @@ public final class ItemFactory {
             armor.cost = 10;
             armor.defenseBoost = 10;
         } else if (tier == 2){
-            armor.name = "Steal Armor";
+            armor.name = "Steel Armor";
             armor.cost = 20;
             armor.defenseBoost = 20;
         }  else if (tier == 3) {

@@ -156,7 +156,7 @@ public class Game {
     }
 
     public Shop getShop() {
-        return shop;
+        return new Shop(this.shop);
     }
 
     public CombatManager getCombatManager() {

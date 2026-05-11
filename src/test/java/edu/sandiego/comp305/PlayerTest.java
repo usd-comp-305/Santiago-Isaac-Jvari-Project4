@@ -77,8 +77,8 @@ class PlayerTest {
         final Player player = new Player("Isaac", 10, 0,10);
         final Weapon sword = ItemFactory.createSwordWeapon(1);
         player.equipWeapon(sword);
-        assertTrue(player.weapon == sword);
-
+        assertEquals(sword.getAttackBoost(), player.weapon.getAttackBoost());
+        assertEquals(sword.getTier(), player.weapon.getTier());
     }
 
     @Test
