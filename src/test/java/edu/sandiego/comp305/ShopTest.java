@@ -13,7 +13,7 @@ class ShopTest {
     @Test
     void buyWeaponUpgrade() {
         final Shop shop = new Shop();
-        final Player player = new Player("Isaac",10,10);
+        final Player player = new Player("Isaac",10,10,10);
 
         final Weapon sword = ItemFactory.createSwordWeapon(1);
         player.equipWeapon(sword);
@@ -28,7 +28,7 @@ class ShopTest {
     @Test
     void buyWeaponUpGradeNoWeapon(){
         final Shop shop = new Shop();
-        final Player player = new Player("Isaac",10,10);
+        final Player player = new Player("Isaac",10,10,10);
         assertTrue(player.gold == 10);
         assertFalse(shop.buyWeaponUpgrade(10,10,player));
         assertTrue(player.gold == 10);
