@@ -1,5 +1,6 @@
 package edu.sandiego.comp305;
 
+import java.util.ArrayList;
 
 public final class ShopFactory {
     private ShopFactory() {

@@ -8,7 +8,7 @@ class ShopFactoryTest {
     @Test
     void createdefualtShop() {
         final Shop defualtShop = ShopFactory.createDefualtShop();
-        assertEquals(7, defualtShop.displayItems().size());
+        assertEquals(8, defualtShop.displayItems().size());
 
     }
 
