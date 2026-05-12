@@ -6,6 +6,7 @@ public class Armor extends Item implements Equippable {
 
     private int defenseBoost;
 
+
     public int getDefenseBoost() {
         return defenseBoost;
     }

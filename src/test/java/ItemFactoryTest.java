@@ -40,13 +40,13 @@ class ItemFactoryTest {
     void createPotion_HasCorrectEffect(final PotionType type,
             final int expectedEffect) {
         final Potion p = ItemFactory.createPotion(type);
-        assertEquals(expectedEffect, p.cost);
+        assertEquals(expectedEffect, p.getCost());
 
     }
 
     void createPotion_HasCorrectCost(final PotionType type,
             final int expectedCost) {
         final Potion p = ItemFactory.createPotion(type);
-        assertEquals(expectedCost, p.cost);
+        assertEquals(expectedCost, p.getCost());
     }
 }
