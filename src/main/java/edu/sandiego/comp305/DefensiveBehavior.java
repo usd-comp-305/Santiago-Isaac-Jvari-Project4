@@ -1,13 +1,15 @@
 package edu.sandiego.comp305;
 
 public class DefensiveBehavior implements EnemyBehavior {
+    private static final int HALF_HEALTH_DIVISOR = 2;
+
     @Override
     public void takeTurn(final Enemy enemy, final Player player) {
-        //change this later
-        if (enemy.getHealth() < 20) {
+        if (enemy.getHealth() < enemy.getMaxHealth() / HALF_HEALTH_DIVISOR) {
             enemy.defend();
         } else {
             enemy.attack(player);
         }
     }
 }
+

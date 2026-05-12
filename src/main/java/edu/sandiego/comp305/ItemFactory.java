@@ -1,36 +1,39 @@
 package edu.sandiego.comp305;
 
-
 public final class ItemFactory {
+
+    private static final int HEALTH_POTION_COST = 10;
+
+    private static final int STRENGTH_POTION_COST = 10;
 
     private ItemFactory() {
         throw new UnsupportedOperationException();
     }
 
-    public static Weapon createSwordWeapon(final int tier){
-        final SwordTier base = SwordTier.fromInt(tier);
-        final Weapon sword = new Weapon();
-        sword.setName(base.getName());
-        sword.setCost(base.getCost());
-        sword.setAttackBoost(base.getAttackBoost());
-        sword.setTier(base.getTier());
-        return sword;
+    public static Potion createPotion(final PotionType type) {
+        switch (type) {
+            case HEALTH:
+                return createHealthPotion();
+
+            case STRENGTH:
+                return createStrengthPotion();
+
+            default:
+                throw new IllegalArgumentException("Unknown potion.");
+        }
     }
 
-    public static Armor createArmor(final int tier){
-        final ArmorTier baseArmor = ArmorTier.fromInt(tier);
-        final Armor armor = new Armor();
-        armor.setName(baseArmor.getName());
-        armor.setCost(baseArmor.getCost());
-        armor.setDefenseBoost(baseArmor.getDefenseBoost());
-        return armor;
+    private static Potion createHealthPotion() {
+        final Potion potion = new HealthPotion();
+        potion.name = "Health Potion";
+        potion.cost = HEALTH_POTION_COST;
+        return potion;
     }
 
-    public static Potion createPotion(final PotionType type){
-        final Potion potion = type.createPotion();
-        potion.setName(type.getName());
-        potion.setCost(type.getCost());
-        potion.setEffectValue(type.getEffectValue());
+    private static Potion createStrengthPotion() {
+        final Potion potion = new StrengthPotion();
+        potion.name = "Strength Potion";
+        potion.cost = STRENGTH_POTION_COST;
         return potion;
     }
 }

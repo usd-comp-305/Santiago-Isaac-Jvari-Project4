@@ -1,26 +1,40 @@
 package edu.sandiego.comp305;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
 
 public class Player {
 
-    private String name;
+    private static final int MAX_HEALTH = 100;
 
-    private int gold;
+    private static final String DEFAULT_NAME = "Player";
 
-    private int health;
+    private static final int DEFAULT_HEALTH = 100;
 
-    private Weapon weapon;
+    private static final int DEFAULT_GOLD = 0;
 
-    private Armor armor;
+    private static final int DEFAULT_ATTACK_POWER = 5;
 
-    private ArrayList<Item> inventory = new ArrayList<>();
+    private static final int DEFAULT_DEFENSE = 0;
 
-    private AttackStrategy attackStrategy;
+    private static final int NO_BONUS = 0;
 
-    private int attackPower;
+    private static final int MIN_HEALTH = 0;
+
+    String name;
+
+    int gold;
+
+    int health;
+
+    Weapon weapon;
+
+    int defense;
+
+    ArrayList<Item> inventory = new ArrayList<>();
+
+    AttackStrategy attackStrategy;
+
+    int attackPower;
 
     public Player(final String name,
                   final int health,
@@ -30,22 +44,16 @@ public class Player {
         this.health = health;
         this.gold = gold;
         this.attackPower = attackPower;
+        this.defense = DEFAULT_DEFENSE;
     }
 
     public Player() {
-        this.name = "Player";
-        this.health = 100;
-        this.gold = 0;
-        this.attackPower = 5;
+        this.name = DEFAULT_NAME;
+        this.health = DEFAULT_HEALTH;
+        this.gold = DEFAULT_GOLD;
+        this.attackPower = DEFAULT_ATTACK_POWER;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
 
     public void attack(final Enemy enemy) {
         int damage = attackPower;
@@ -62,50 +70,45 @@ public class Player {
     }
 
     public void takeDamage(final int damage){
-        this.health -= damage;
+        int reducedDamage = damage - defense;
+
+        if (reducedDamage < NO_BONUS) {
+            reducedDamage = NO_BONUS;
+        }
+
+        health -= reducedDamage;
+
+        if (health < MIN_HEALTH) {
+            health = MIN_HEALTH;
+        }
     }
 
     public void heal (final int amount){
-        this.health += amount;
+        health += amount;
+
+        if (health > MAX_HEALTH) {
+            health = MAX_HEALTH;
+        }
     }
 
     public void addToInventory(final Item item){
         inventory.add(item);
     }
 
-    public boolean hasInInventory(final Item item){
-        return inventory.contains(item);
-    }
-
-    public List<Item> getInventory(){
-        return Collections.unmodifiableList(inventory);
-    }
-
     public void usePotion(final Potion potion){
+        if (potion == null) {
+            return;
+        }
+
         potion.applyEffect(this);
+        inventory.remove(potion);
     }
 
     public void equipWeapon(final Weapon weapon){
         final Weapon copy = new Weapon();
         copy.setAttackBoost(weapon.getAttackBoost());
-        copy.setTier(weapon.getTier());
         this.weapon = copy;
-    }
 
-    public Weapon getWeapon() {
-        if (weapon == null) {
-            return null;
-        }
-        final Weapon copy = new Weapon();
-        copy.setAttackBoost(weapon.getAttackBoost());
-        copy.setTier(weapon.getTier());
-        return copy;
-    }
-
-    public void equipArmor(final Armor armor){
-        final Armor copy = new Armor();
-        copy.setDefenseBoost(armor.getDefenseBoost());
-        this.armor = copy;
     }
 
     public void setAttackStrategy(final AttackStrategy strategy){
@@ -124,20 +127,12 @@ public class Player {
         this.gold -= amount;
     }
 
-    public Armor getArmor() {
-        if (armor == null) {
-            return null;
-        }
-        final Armor copy = new Armor();
-        copy.setDefenseBoost(armor.getDefenseBoost());
-        return copy;
-
+    public void increaseDefense(final int amount) {
+        defense += amount;
     }
 
-    public void boostWeapon(final int amount){
-        if(weapon != null) {
-            weapon.setAttackBoost(weapon.getAttackBoost() + amount);
-        }
+    public int getDefense() {
+        return defense;
     }
 
     public AttackStrategy getAttackStrategy() {
@@ -145,15 +140,14 @@ public class Player {
     }
 
     public boolean isAlive(){
-        return health > 0;
+        if (health <= MIN_HEALTH){
+            return false;
+        }
+        return true;
     }
 
     public int getHealth() {
         return health;
-    }
-
-    public void setHealth(final int health) {
-        this.health = health;
     }
 
     public int getAttackPower() {

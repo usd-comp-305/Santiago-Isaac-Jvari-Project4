@@ -4,6 +4,7 @@ public class Zombie extends Enemy {
 
     public Zombie() {
         super("Zombie", 35, 7, 12, "moaning");
+        setBehaviorStrategy(new RageDefensiveBehavior());
     }
 }
 

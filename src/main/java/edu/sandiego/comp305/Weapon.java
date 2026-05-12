@@ -1,6 +1,6 @@
 package edu.sandiego.comp305;
 
-public class Weapon extends Item implements Equippable{
+public class Weapon extends Item{
     private int attackBoost;
 
     private int tier;
@@ -21,10 +21,6 @@ public class Weapon extends Item implements Equippable{
         return attackBoost;
     }
 
-    @Override
-    public void equip(final Player player){
-        player.equipWeapon(this);
-    }
 
 }
 

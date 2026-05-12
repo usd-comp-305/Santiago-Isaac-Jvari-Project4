@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class HintSystemTests {
 
     @Test
-    public void testGetHintForEnemyNotNull() {
+    public void getHintForEnemyNotNull() {
         final HintSystem hintSystem = new HintSystem();
         final Enemy enemy = new Slime();
 
@@ -18,7 +18,7 @@ public class HintSystemTests {
     }
 
     @Test
-    public void testGetHintIncludesEnemyHint() {
+    public void getHintIncludesEnemyHint() {
         final HintSystem hintSystem = new HintSystem();
         final Enemy enemy = new Skeleton();
 
@@ -30,7 +30,7 @@ public class HintSystemTests {
     }
 
     @Test
-    public void testGetHintIncludesDirection() {
+    public void getHintIncludesDirection() {
         final HintSystem hintSystem = new HintSystem();
         final Enemy enemy = new Zombie();
 
@@ -42,7 +42,7 @@ public class HintSystemTests {
     }
 
     @Test
-    public void testDirectionalMessage() {
+    public void directionalMessage() {
         final HintSystem hintSystem = new HintSystem();
 
         final String result = hintSystem.getDirectionalMessage(

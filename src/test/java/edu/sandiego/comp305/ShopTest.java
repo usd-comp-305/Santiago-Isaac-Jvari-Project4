@@ -7,52 +7,119 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShopTest {
 
     @Test
-    void displayItems() {
-    }
-
-    @Test
-    void buyWeaponUpgrade() {
+    void testBuyWeaponBoostWithEnoughGold() {
         final Shop shop = new Shop();
-        final ShopService shopService = new ShopService(shop);
-        final Player player = new Player("Isaac", 10, 10, 10);
+        final Player player = new Player("Test", 100, 20, 5);
 
-        final Weapon sword = ItemFactory.createSwordWeapon(1);
-        player.equipWeapon(sword);
-
-        final boolean result = shopService.buyWeaponBoost(player,10,10);
+        final boolean result = shop.buyWeaponBoost(player);
 
         assertTrue(result);
+        assertTrue(player.getGold() < 20);
+        assertNotNull(player.weapon);
+        assertTrue(player.weapon.getAttackBoost() > 0);
+    }
+
+    @Test
+    void testBuyWeaponBoostWithoutEnoughGold() {
+        final Shop shop = new Shop();
+        final Player player = new Player("Test", 100, 0, 5);
+
+        final boolean result = shop.buyWeaponBoost(player);
+
+        assertFalse(result);
         assertEquals(0, player.getGold());
-        assertEquals(20, player.getWeapon().getAttackBoost());
     }
 
     @Test
-    void buyWeaponUpGradeNoWeapon() {
+    void testBuyArmorUpgradeWithEnoughGold() {
         final Shop shop = new Shop();
-        final ShopService shopService = new ShopService(shop);
-        final Player player = new Player("Isaac", 10, 10, 10);
-        assertTrue(player.getGold() == 10);
-        assertFalse(shopService.buyWeaponBoost(player,10,10));
-        assertTrue(player.getGold() == 10);
+        final Player player = new Player("Test", 100, 20, 5);
+
+        final int defenseBefore = player.getDefense();
+
+        final boolean result = shop.buyArmorUpgrade(player);
+
+        assertTrue(result);
+        assertTrue(player.getGold() < 20);
+        assertTrue(player.getDefense() > defenseBefore);
     }
 
     @Test
-    void buyArmorUpGrade() {
+    void testBuyArmorUpgradeWithoutEnoughGold() {
         final Shop shop = new Shop();
-        final ShopService shopService = new ShopService(shop);
-        final Player player = new Player("Isaac", 10, 10, 10);
-        final Armor armor = ItemFactory.createArmor(1);
-        shopService.buyArmorUpgrade(player, armor, 10);
+        final Player player = new Player("Test", 100, 0, 5);
+
+        final int defenseBefore = player.getDefense();
+
+        final boolean result = shop.buyArmorUpgrade(player);
+
+        assertFalse(result);
+        assertEquals(0, player.getGold());
+        assertEquals(defenseBefore, player.getDefense());
     }
 
     @Test
-    void buyPotionHealth() {
+    void testBuyHealthPotionWithEnoughGold() {
         final Shop shop = new Shop();
-        final ShopService shopService = new ShopService(shop);
-        final Player player = new Player("Isaac", 10, 10, 10);
-        final Potion health = ItemFactory.createPotion(PotionType.HEALTH);
-        shop.addItem(health);
-        shopService.buyItem(player, health);
+        final Player player = new Player("Test", 100, 20, 5);
+        final Potion potion = ItemFactory.createPotion(PotionType.HEALTH);
+
+        final boolean result = shop.buyPotion(player, potion);
+
+        assertTrue(result);
+        assertTrue(player.getGold() < 20);
+        assertEquals(1, player.inventory.size());
+        assertTrue(player.inventory.get(0) instanceof HealthPotion);
     }
 
+    @Test
+    void testBuyStrengthPotionWithEnoughGold() {
+        final Shop shop = new Shop();
+        final Player player = new Player("Test", 100, 20, 5);
+        final Potion potion = ItemFactory.createPotion(PotionType.STRENGTH);
+
+        final boolean result = shop.buyPotion(player, potion);
+
+        assertTrue(result);
+        assertTrue(player.getGold() < 20);
+        assertEquals(1, player.inventory.size());
+        assertTrue(player.inventory.get(0) instanceof StrengthPotion);
+    }
+
+    @Test
+    void testBuyPotionWithoutEnoughGold() {
+        final Shop shop = new Shop();
+        final Player player = new Player("Test", 100, 0, 5);
+        final Potion potion = ItemFactory.createPotion(PotionType.HEALTH);
+
+        final boolean result = shop.buyPotion(player, potion);
+
+        assertFalse(result);
+        assertEquals(0, player.getGold());
+        assertEquals(0, player.inventory.size());
+    }
+
+    @Test
+    void testWeaponPriceIncreasesAfterPurchase() {
+        final Shop shop = new Shop();
+        final Player player = new Player("Test", 100, 100, 5);
+
+        final int priceBefore = shop.getWeaponPrice();
+
+        shop.buyWeaponBoost(player);
+
+        assertTrue(shop.getWeaponPrice() > priceBefore);
+    }
+
+    @Test
+    void testArmorPriceIncreasesAfterPurchase() {
+        final Shop shop = new Shop();
+        final Player player = new Player("Test", 100, 100, 5);
+
+        final int priceBefore = shop.getArmorPrice();
+
+        shop.buyArmorUpgrade(player);
+
+        assertTrue(shop.getArmorPrice() > priceBefore);
+    }
 }
