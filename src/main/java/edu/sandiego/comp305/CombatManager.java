@@ -40,11 +40,13 @@ public class CombatManager {
     }
 
     public void playerTurn(final Player player, final Enemy enemy) {
-        chooseAttackStrategy(player);
+
 
         final int enemyHealthBefore = enemy.getHealth();
+        if(chooseAttackStrategy(player)){
+            player.attack(enemy);
+        }
 
-        player.attack(enemy);
 
         final int damageDone = enemyHealthBefore - enemy.getHealth();
 
@@ -118,7 +120,7 @@ public class CombatManager {
         System.out.println("Invalid potion choice.");
     }
 
-    private void chooseAttackStrategy(final Player player) {
+    private boolean chooseAttackStrategy(final Player player) {
         System.out.println("\nChoose your attack:");
         System.out.println("1. Basic attack");
         System.out.println("2. Heavy attack");
@@ -131,21 +133,21 @@ public class CombatManager {
             case "1":
                 player.setAttackStrategy(new BasicAttack());
                 System.out.println("You chose a basic attack.");
-                break;
+                return true;
 
             case "2":
                 player.setAttackStrategy(new HeavyAttack());
                 System.out.println("You chose a heavy attack.");
-                break;
+                return true;
 
             case "3":
                 player.setAttackStrategy(new MagicAttack());
                 System.out.println("You chose a magic attack.");
-                break;
+                return true;
 
             case "4":
                 choosePotion(player);
-                break;
+                return false;
 
 
             default:
@@ -153,6 +155,7 @@ public class CombatManager {
                 System.out.println("Invalid choice. Using basic attack.");
                 break;
         }
+        return false;
     }
 
     public void enemyTurn(final Enemy enemy, final Player player) {
