@@ -2,6 +2,22 @@ package edu.sandiego.comp305;
 
 public abstract class Enemy {
 
+    private static final int DEFENSE_BONUS_AMOUNT = 5;
+
+    private static final int RAGE_ATTACK_BONUS = 5;
+
+    private static final int HEALTH_INCREASE_PER_DIFFICULTY = 10;
+
+    private static final int ATTACK_INCREASE_PER_DIFFICULTY = 3;
+
+    private static final int GOLD_INCREASE_PER_DIFFICULTY = 5;
+
+    private static final int NO_BONUS = 0;
+
+    private static final int MIN_HEALTH = 0;
+
+    private final int maxHealth;
+
     public String name;
 
     public String hint;
@@ -27,6 +43,7 @@ public abstract class Enemy {
         this.attackPower = attackPower;
         this.goldReward = goldReward;
         this.hint = hint;
+        this.maxHealth = health;
 
     }
 
@@ -39,26 +56,26 @@ public abstract class Enemy {
 
         player.takeDamage(damage);
 
-        attackBonus = 0;
+        attackBonus = NO_BONUS;
     }
 
     public void takeDamage(final int amount) {
         int reducedDamage = amount - defenseBonus;
 
-        if (reducedDamage < 0) {
-            reducedDamage = 0;
+        if (reducedDamage < NO_BONUS) {
+            reducedDamage = NO_BONUS;
         }
 
         health -= reducedDamage;
 
-        if (health < 0) {
-            health = 0;
+        if (health < MIN_HEALTH) {
+            health = MIN_HEALTH;
         }
-        defenseBonus = 0;
+        defenseBonus = NO_BONUS;
     }
 
     public boolean isAlive() {
-        return getHealth() != 0;
+        return getHealth() != MIN_HEALTH;
     }
 
     public String getHint() {
@@ -94,17 +111,21 @@ public abstract class Enemy {
     }
 
     public void defend() {
-        defenseBonus = 5;
+        defenseBonus = DEFENSE_BONUS_AMOUNT;
     }
 
     public void rage() {
-        attackBonus = 5;
+        attackBonus = RAGE_ATTACK_BONUS;
+    }
+
+    public int getMaxHealth(){
+        return maxHealth;
     }
 
     public void increaseStats(final int difficultyLevel) {
-        health += difficultyLevel * 5;
-        attackPower += difficultyLevel * 2;
-        goldReward += difficultyLevel * 3;
+        health += difficultyLevel * HEALTH_INCREASE_PER_DIFFICULTY;
+        attackPower += difficultyLevel * ATTACK_INCREASE_PER_DIFFICULTY;
+        goldReward += difficultyLevel * GOLD_INCREASE_PER_DIFFICULTY;
     }
 
 }

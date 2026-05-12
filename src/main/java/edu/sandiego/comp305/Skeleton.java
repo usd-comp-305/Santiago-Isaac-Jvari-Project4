@@ -4,5 +4,6 @@ public class Skeleton extends Enemy {
 
     public Skeleton() {
         super("Skeleton", 33, 6, 11, "rattling");
+        setBehaviorStrategy(new RageDefensiveBehavior());
     }
 }

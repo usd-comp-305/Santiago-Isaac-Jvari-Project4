@@ -1,72 +1,38 @@
 package edu.sandiego.comp305;
 
-
 public final class ItemFactory {
+
+    private static final int HEALTH_POTION_COST = 10;
+    private static final int STRENGTH_POTION_COST = 10;
 
     private ItemFactory() {
         throw new UnsupportedOperationException();
     }
 
-    public static Weapon createSwordWeapon(final int tier){
-        final Weapon sword = new Weapon();
-        if (tier == 1){
-            sword.name = "Wood Sword";
-            sword.cost = 10;
-            sword.setAttackBoost(10);
-            sword.setTier(1);
-        } else if (tier == 2){
-            sword.name = "Steel Sword";
-            sword.cost = 20;
-            sword.setAttackBoost(20);
-            sword.setTier(2);
-        } else if (tier == 3) {
-            sword.name = "Diamond Sword";
-            sword.cost = 30;
-            sword.setAttackBoost(30);
-            sword.setTier(3);
+    public static Potion createPotion(final PotionType type) {
+        switch (type) {
+            case HEALTH:
+                return createHealthPotion();
+
+            case STRENGTH:
+                return createStrengthPotion();
+
+            default:
+                throw new IllegalArgumentException("Unknown potion.");
         }
-        return sword;
     }
 
-    public static Armor createArmor(final int tier){
-        final Armor armor = new Armor();
-        if (tier == 1){
-            armor.name = "Wood Armor";
-            armor.cost = 10;
-            armor.defenseBoost = 10;
-        } else if (tier == 2){
-            armor.name = "Steel Armor";
-            armor.cost = 20;
-            armor.defenseBoost = 20;
-        }  else if (tier == 3) {
-            armor.name = "Diamond Armor";
-            armor.cost = 30;
-            armor.defenseBoost = 30;
-        }
-        return armor;
+    private static Potion createHealthPotion() {
+        final Potion potion = new HealthPotion();
+        potion.name = "Health Potion";
+        potion.cost = HEALTH_POTION_COST;
+        return potion;
     }
 
-    public static Potion createPotion(final PotionType type){
-        switch (type){
-            case HEALTH -> {
-                final Potion potion = new HealthPotion();
-                potion.name = "Healing Potion";
-                potion.cost = 10;
-                potion.effectValue = 30;
-                return potion;
-
-
-            }
-            case STRENGTH -> {
-                final Potion potion = new StrengthPotion();
-                potion.name = "Strength Potion";
-                potion.cost = 10;
-                potion.effectValue = 10;
-                return potion;
-            }
-            default -> {
-                return null;
-            }
-        }
+    private static Potion createStrengthPotion() {
+        final Potion potion = new StrengthPotion();
+        potion.name = "Strength Potion";
+        potion.cost = STRENGTH_POTION_COST;
+        return potion;
     }
 }

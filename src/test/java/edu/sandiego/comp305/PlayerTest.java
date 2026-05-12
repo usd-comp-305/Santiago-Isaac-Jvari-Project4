@@ -59,7 +59,7 @@ class PlayerTest {
     void useHealthPotion() {
         final Player player = new Player("Isaac", 10, 0,10);
         final Potion health = ItemFactory.createPotion(PotionType.HEALTH);
-        final int expectedHealth = 40;
+        final int expectedHealth = 35;
         player.usePotion(health);
         assertEquals(expectedHealth, player.health);
     }
@@ -70,31 +70,6 @@ class PlayerTest {
         final Potion health = ItemFactory.createPotion(PotionType.HEALTH);
         player.addToInventory(health);
         assertTrue(player.inventory.contains(health));
-    }
-
-    @Test
-    void equipWeapon() {
-        final Player player = new Player("Isaac", 10, 0,10);
-        final Weapon sword = ItemFactory.createSwordWeapon(1);
-        player.equipWeapon(sword);
-        assertEquals(sword.getAttackBoost(), player.weapon.getAttackBoost());
-        assertEquals(sword.getTier(), player.weapon.getTier());
-    }
-
-    @Test
-    void equipArmor() {
-        final Player player = new Player("Isaac", 10, 0,10);
-        final Armor armor = ItemFactory.createArmor(1);
-        player.equipArmor(armor);
-        assertTrue(player.armor == armor);
-    }
-
-    @Test
-    void getArmor() {
-        final Player player = new Player("Isaac", 10, 0,10);
-        final Armor armor = ItemFactory.createArmor(1);
-        player.equipArmor(armor);
-        assertTrue(player.armor == player.getArmor());
     }
 
     @Test

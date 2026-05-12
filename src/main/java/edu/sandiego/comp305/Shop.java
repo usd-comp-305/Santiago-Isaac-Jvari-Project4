@@ -1,101 +1,77 @@
 package edu.sandiego.comp305;
 
-import java.util.ArrayList;
-
 public class Shop {
-    private ArrayList<Item> avaliableItems;
+
+    private static final int STARTING_WEAPON_PRICE = 10;
+    private static final int STARTING_ARMOR_PRICE = 10;
+    private static final int STARTING_POTION_PRICE = 10;
+
+    private static final int WEAPON_BOOST_AMOUNT = 5;
+    private static final int ARMOR_BOOST_AMOUNT = 3;
+    private static final int PRICE_INCREASE = 5;
+
+    private int weaponPrice;
+    private int armorPrice;
+    private int potionPrice;
 
     public Shop() {
-        this.avaliableItems = new ArrayList<>();
+        weaponPrice = STARTING_WEAPON_PRICE;
+        armorPrice = STARTING_ARMOR_PRICE;
+        potionPrice = STARTING_POTION_PRICE;
     }
 
-    public Shop(final Shop other){
-        this.avaliableItems = new ArrayList<>(other.avaliableItems);
-    }
-
-
-    public ArrayList<Item> displayItems(){
-        return new ArrayList<>(avaliableItems);
-    }
-
-    public void addItem(final Item item){
-        avaliableItems.add(item);
-    }
-
-    public void removeItem(final Item item){
-        avaliableItems.remove(item);
-    }
-
-    public void addMultipleItems(final ArrayList<Item> items){
-        avaliableItems.addAll(items);
-    }
-
-    public boolean buyWeaponBoost(
-            final int boostAmount,
-            final int price,
-            final Player player){
-        if (canPlayerAfford(player,price)){
-            if (player.weapon != null){
-                player.weapon.setAttackBoost(
-                        player.weapon.getAttackBoost()
-                                + boostAmount);
-                player.decreaseGold(price);
-                return true;
-            }else{
-                return false;
-            }
-        }
-        return false;
-    }
-
-    public void buyNewWeapon(final Player player, final Weapon weapon){
-        final int weaponPrice = weapon.cost;
-        if(!(player.inventory.contains(weapon))
-                && canPlayerAfford(player, weaponPrice)
-                && this.avaliableItems.contains(weapon)){
-            player.inventory.add(weapon);
-            player.decreaseGold(weaponPrice);
-            this.removeItem(weapon);
-
-        }
-    }
-
-
-    private boolean canPlayerAfford(final Player player, final int price){
-        if (player.gold >= price) {
-            return true;
-        }
-        return false;
-    }
-
-    public void buyArmorUpgrade(
-            final Player player,
-            final int price,
-            final Armor armor){
-        if (canPlayerAfford(player,price) && !isArmorMaxed(armor)){
-            player.decreaseGold(price);
-            armor.defenseBoost += 10;
+    public boolean buyWeaponBoost(final Player player) {
+        if (!canPlayerAfford(player, weaponPrice)) {
+            return false;
         }
 
-    }
-
-    private boolean isArmorMaxed(final Armor armor){
-        if (armor.defenseBoost >= armor.maxDefenseBoost){
-            return true;
+        if (player.weapon == null) {
+            player.equipWeapon(new Weapon());
         }
-        return false;
+
+        player.weapon.setAttackBoost(
+                player.weapon.getAttackBoost() + WEAPON_BOOST_AMOUNT);
+
+        player.decreaseGold(weaponPrice);
+        weaponPrice += PRICE_INCREASE;
+        return true;
     }
 
-
-    public void buyPotion(final Player player,
-                          final int price,
-                          final Potion potion){
-        if(avaliableItems.contains(potion) &&
-                canPlayerAfford(player,price)){
-            this.removeItem(potion);
-            player.decreaseGold(price);
-            player.addToInventory(potion);
+    public boolean buyArmorUpgrade(final Player player) {
+        if (!canPlayerAfford(player, armorPrice)) {
+            return false;
         }
+
+        player.increaseDefense(ARMOR_BOOST_AMOUNT);
+        player.decreaseGold(armorPrice);
+        armorPrice += PRICE_INCREASE;
+
+        return true;
     }
 
+    public boolean buyPotion(final Player player, final Potion potion) {
+        if (!canPlayerAfford(player, potionPrice)) {
+            return false;
+        }
+
+        player.decreaseGold(potionPrice);
+        player.addToInventory(potion);
+        return true;
+    }
+
+    private boolean canPlayerAfford(final Player player, final int price) {
+        return player.getGold() >= price;
+    }
+
+    public int getWeaponPrice() {
+        return weaponPrice;
+    }
+
+    public int getArmorPrice() {
+        return armorPrice;
+    }
+
+    public int getPotionPrice() {
+        return potionPrice;
+    }
 }
