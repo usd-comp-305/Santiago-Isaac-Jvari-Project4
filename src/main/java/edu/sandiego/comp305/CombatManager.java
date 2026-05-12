@@ -40,7 +40,6 @@ public class CombatManager {
     }
 
     public void playerTurn(final Player player, final Enemy enemy) {
-        choosePotion(player);
         chooseAttackStrategy(player);
 
         final int enemyHealthBefore = enemy.getHealth();
@@ -81,6 +80,7 @@ public class CombatManager {
         if (input.equals("1")) {
             usePotion(player);
         }
+        else{chooseAttackStrategy(player);}
     }
 
     private void usePotion(final Player player) {
@@ -101,8 +101,7 @@ public class CombatManager {
 
         for (final Item item : player.inventory) {
             if (item instanceof Potion) {
-                if (input.equals(
-                        String.valueOf(currentPotionNumber))) {
+                if (input.equals(String.valueOf(currentPotionNumber))) {
                     final Potion potion = (Potion) item;
                     player.usePotion(potion);
                     player.inventory.remove(item);
@@ -123,6 +122,7 @@ public class CombatManager {
         System.out.println("1. Basic attack");
         System.out.println("2. Heavy attack");
         System.out.println("3. Magic attack");
+        System.out.println("4. Use Potion");
 
         final String input = getChoice();
 
@@ -141,6 +141,11 @@ public class CombatManager {
                 player.setAttackStrategy(new MagicAttack());
                 System.out.println("You chose a magic attack.");
                 break;
+
+            case "4":
+                choosePotion(player);
+                break;
+
 
             default:
                 player.setAttackStrategy(new BasicAttack());
