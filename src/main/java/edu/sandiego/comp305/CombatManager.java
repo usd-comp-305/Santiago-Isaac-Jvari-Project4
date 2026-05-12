@@ -79,8 +79,9 @@ public class CombatManager {
 
         if (input.equals("1")) {
             usePotion(player);
+        } else {
+            chooseAttackStrategy(player);
         }
-        else{chooseAttackStrategy(player);}
     }
 
     private void usePotion(final Player player) {
