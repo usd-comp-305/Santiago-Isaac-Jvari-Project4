@@ -27,7 +27,7 @@ public class CombatManager {
 
 
     public void resolveVictory(final Player player, final Enemy enemy) {
-        player.gold += enemy.getGoldReward();
+        player.increaseGold(player.getGold() + enemy.getGoldReward());
     }
 
     public void resolveEnemyVictory(final Dungeon dungeon, final Enemy enemy) {

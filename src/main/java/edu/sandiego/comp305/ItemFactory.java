@@ -33,15 +33,15 @@ public final class ItemFactory {
         if (tier == 1){
             armor.name = "Wood Armor";
             armor.cost = 10;
-            armor.defenseBoost = 10;
+            armor.setDefenseBoost(armor.getDefenseBoost() + 10);
         } else if (tier == 2){
             armor.name = "Steel Armor";
             armor.cost = 20;
-            armor.defenseBoost = 20;
+            armor.setDefenseBoost(armor.getDefenseBoost() + 20);
         }  else if (tier == 3) {
             armor.name = "Diamond Armor";
             armor.cost = 30;
-            armor.defenseBoost = 30;
+            armor.setDefenseBoost(armor.getDefenseBoost() + 30);
         }
         return armor;
     }
@@ -52,7 +52,7 @@ public final class ItemFactory {
                 final Potion potion = new HealthPotion();
                 potion.name = "Healing Potion";
                 potion.cost = 10;
-                potion.effectValue = 30;
+                potion.setEffectValue(30);
                 return potion;
 
 
@@ -61,7 +61,7 @@ public final class ItemFactory {
                 final Potion potion = new StrengthPotion();
                 potion.name = "Strength Potion";
                 potion.cost = 10;
-                potion.effectValue = 10;
+                potion.setEffectValue(10);
                 return potion;
             }
             default -> {

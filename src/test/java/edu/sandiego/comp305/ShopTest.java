@@ -22,16 +22,16 @@ class ShopTest {
 
         assertTrue(result);
         assertEquals(0, player.getGold());
-        assertEquals(20, player.weapon.getAttackBoost());
+        assertEquals(20, player.getWeapon().getAttackBoost());
     }
 
     @Test
     void buyWeaponUpGradeNoWeapon() {
         final Shop shop = new Shop();
         final Player player = new Player("Isaac", 10, 10, 10);
-        assertTrue(player.gold == 10);
+        assertTrue(player.getGold() == 10);
         assertFalse(shop.buyWeaponBoost(10, 10, player));
-        assertTrue(player.gold == 10);
+        assertTrue(player.getGold() == 10);
     }
 
     @Test
