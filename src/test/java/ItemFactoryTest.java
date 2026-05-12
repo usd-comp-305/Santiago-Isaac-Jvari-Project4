@@ -28,7 +28,7 @@ class ItemFactoryTest {
     })
     void createArmor_DefenseBoost(final int tier, final int expectedBoost) {
         final Armor a = ItemFactory.createArmor(tier);
-        assertEquals(expectedBoost,a.defenseBoost);
+        assertEquals(expectedBoost,a.getDefenseBoost());
     }
 
     @ParameterizedTest

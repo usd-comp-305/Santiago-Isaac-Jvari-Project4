@@ -32,10 +32,11 @@ public class Game {
         System.out.println("  Welcome to Dungeon Daedalus!");
         System.out.println("=============================");
         System.out.print("Enter your name, adventurer: ");
-        player.name = scanner.nextLine();
-        System.out.println("Welcome, " + player.name + "!");
+        player.setName(scanner.nextLine());
+        System.out.println("Welcome, " + player.getName() + "!");
         notifyObservers("Let Games started! Happy hunting "
-                + player.name + " and may the odds be ever in your favor!");
+                + player.getName() +
+                " and may the odds be ever in your favor!");
     }
 
     private void gameLoop() {

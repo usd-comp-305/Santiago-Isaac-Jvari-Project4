@@ -1,24 +1,26 @@
 package edu.sandiego.comp305;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
 
 public class Player {
 
-    String name;
+    private String name;
 
-    int gold;
+    private int gold;
 
-    int health;
+    private int health;
 
-    Weapon weapon;
+    private Weapon weapon;
 
-    Armor armor;
+    private Armor armor;
 
-    ArrayList<Item> inventory = new ArrayList<>();
+    private ArrayList<Item> inventory = new ArrayList<>();
 
-    AttackStrategy attackStrategy;
+    private AttackStrategy attackStrategy;
 
-    int attackPower;
+    private int attackPower;
 
     public Player(final String name,
                   final int health,
@@ -37,6 +39,13 @@ public class Player {
         this.attackPower = 5;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
 
     public void attack(final Enemy enemy) {
         int damage = attackPower;
@@ -64,6 +73,14 @@ public class Player {
         inventory.add(item);
     }
 
+    public boolean hasInInventory(final Item item){
+        return inventory.contains(item);
+    }
+
+    public List<Item> getInventory(){
+        return Collections.unmodifiableList(inventory);
+    }
+
     public void usePotion(final Potion potion){
         potion.applyEffect(this);
     }
@@ -73,11 +90,22 @@ public class Player {
         copy.setAttackBoost(weapon.getAttackBoost());
         copy.setTier(weapon.getTier());
         this.weapon = copy;
+    }
 
+    public Weapon getWeapon() {
+        if (weapon == null) {
+            return null;
+        }
+        final Weapon copy = new Weapon();
+        copy.setAttackBoost(weapon.getAttackBoost());
+        copy.setTier(weapon.getTier());
+        return copy;
     }
 
     public void equipArmor(final Armor armor){
-        this.armor = armor;
+        final Armor copy = new Armor();
+        copy.setDefenseBoost(armor.getDefenseBoost());
+        this.armor = copy;
     }
 
     public void setAttackStrategy(final AttackStrategy strategy){
@@ -97,7 +125,19 @@ public class Player {
     }
 
     public Armor getArmor() {
-        return armor;
+        if (armor == null) {
+            return null;
+        }
+        final Armor copy = new Armor();
+        copy.setDefenseBoost(armor.getDefenseBoost());
+        return copy;
+
+    }
+
+    public void boostWeapon(final int amount){
+        if(weapon != null) {
+            weapon.setAttackBoost(weapon.getAttackBoost() + amount);
+        }
     }
 
     public AttackStrategy getAttackStrategy() {
@@ -105,14 +145,15 @@ public class Player {
     }
 
     public boolean isAlive(){
-        if (health <= 0){
-            return false;
-        }
-        return true;
+        return health > 0;
     }
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(final int health) {
+        this.health = health;
     }
 
     public int getAttackPower() {

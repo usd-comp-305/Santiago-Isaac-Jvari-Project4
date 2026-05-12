@@ -34,26 +34,21 @@ public class Shop {
             final int boostAmount,
             final int price,
             final Player player){
-        if (canPlayerAfford(player,price)){
-            if (player.weapon != null){
-                player.weapon.setAttackBoost(
-                        player.weapon.getAttackBoost()
-                                + boostAmount);
-                player.decreaseGold(price);
-                return true;
-            }else{
-                return false;
-            }
+        if (player.getWeapon() == null ||
+                !canPlayerAfford(player,price)){
+            return false;
         }
-        return false;
+        player.boostWeapon(boostAmount);
+        player.decreaseGold(price);
+        return true;
     }
 
     public void buyNewWeapon(final Player player, final Weapon weapon){
-        final int weaponPrice = weapon.cost;
-        if(!(player.inventory.contains(weapon))
+        final int weaponPrice = weapon.getCost();
+        if(!(player.hasInInventory(weapon))
                 && canPlayerAfford(player, weaponPrice)
                 && this.avaliableItems.contains(weapon)){
-            player.inventory.add(weapon);
+            player.addToInventory(weapon);
             player.decreaseGold(weaponPrice);
             this.removeItem(weapon);
 
@@ -62,7 +57,7 @@ public class Shop {
 
 
     private boolean canPlayerAfford(final Player player, final int price){
-        if (player.gold >= price) {
+        if (player.getGold() >= price) {
             return true;
         }
         return false;
@@ -74,13 +69,13 @@ public class Shop {
             final Armor armor){
         if (canPlayerAfford(player,price) && !isArmorMaxed(armor)){
             player.decreaseGold(price);
-            armor.defenseBoost += 10;
+            armor.increaseDefense(10);
         }
 
     }
 
     private boolean isArmorMaxed(final Armor armor){
-        if (armor.defenseBoost >= armor.maxDefenseBoost){
+        if (armor.getDefenseBoost() >= armor.getMaxDefenseBoost()){
             return true;
         }
         return false;
