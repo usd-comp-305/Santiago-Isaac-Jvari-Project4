@@ -8,13 +8,19 @@ import java.util.Scanner;
 public class Game {
 
     private int enemiesKilled;
+
     private int bossesKilled;
 
     private final Scanner scanner;
+
     private final Player player;
+
     private final Dungeon dungeon;
+
     private final Shop shop;
+
     private final CombatManager combatManager;
+
     private final List<GameObserver> observers;
 
     public Game() {
@@ -105,12 +111,10 @@ public class Game {
         notifyObservers("You left the dungeon.");
     }
 
-    public void printHints() {
-        final Direction[] directions = {
-                Direction.LEFT,
-                Direction.FORWARD,
-                Direction.RIGHT
-        };
+    public void printHints(){
+        final Direction[] directions =
+                {Direction.LEFT, Direction.FORWARD, Direction.RIGHT
+                };
 
         for (final Direction direction : directions) {
             System.out.println(dungeon.getHint(direction));
@@ -155,7 +159,8 @@ public class Game {
     }
 
     public void explore(final Direction direction) {
-        final Encounter encounter = dungeon.exploreDirection(direction);
+        final Encounter encounter = dungeon.exploreDirection(
+                direction);
 
         if (encounter == null) {
             notifyObservers("This path seems quiet.");
@@ -163,7 +168,8 @@ public class Game {
             return;
         }
 
-        final Enemy enemy = createEnemyFromEncounter(encounter);
+        final Enemy enemy = createEnemyFromEncounter(
+                encounter);
 
         notifyObservers("You encountered a " + enemy.getName() + "!");
 
@@ -188,7 +194,8 @@ public class Game {
         }
     }
 
-    private Enemy createEnemyFromEncounter(final Encounter encounter) {
+    private Enemy createEnemyFromEncounter(
+            final Encounter encounter) {
         if (encounter.isBossEncounter()) {
             return dungeon.getEnemyFactory().createBoss(
                     encounter.getEnemyName());
@@ -205,10 +212,14 @@ public class Game {
         while (shopping) {
             System.out.println("\nWelcome to the shop!");
             System.out.println("Gold: " + player.getGold());
-            System.out.println("1. Buy weapon upgrade - " + shop.getWeaponPrice());
-            System.out.println("2. Buy armor upgrade - " + shop.getArmorPrice());
-            System.out.println("3. Buy health potion - " + shop.getPotionPrice());
-            System.out.println("4. Buy strength potion - " + shop.getPotionPrice());
+            System.out.println("1. Buy weapon upgrade - " +
+                    shop.getWeaponPrice());
+            System.out.println("2. Buy armor upgrade - " +
+                    shop.getArmorPrice());
+            System.out.println("3. Buy health potion - " +
+                    shop.getPotionPrice());
+            System.out.println("4. Buy strength potion - " +
+                    shop.getPotionPrice());
             System.out.println("5. Leave shop");
 
             final String input = getChoice();
@@ -236,7 +247,8 @@ public class Game {
                     break;
 
                 default:
-                    System.out.println("Invalid choice. Please enter 1-4.");
+                    System.out.println(
+                            "Invalid choice. Please enter 1-4.");
                     break;
             }
         }
@@ -259,7 +271,8 @@ public class Game {
     }
 
     private void buyHealthPotion() {
-        final Potion potion = ItemFactory.createPotion(PotionType.HEALTH);
+        final Potion potion =
+                ItemFactory.createPotion(PotionType.HEALTH);
 
         if (shop.buyPotion(player, potion)) {
             notifyObservers("You bought a health potion.");
@@ -269,7 +282,8 @@ public class Game {
     }
 
     private void buyStrengthPotion() {
-        final Potion potion = ItemFactory.createPotion(PotionType.STRENGTH);
+        final Potion potion =
+                ItemFactory.createPotion(PotionType.STRENGTH);
 
         if (shop.buyPotion(player, potion)) {
             notifyObservers("You bought a strength potion.");
@@ -312,20 +326,17 @@ public class Game {
 
     private void printDeathArt() {
         final String name = player.name;
-
-        System.out.println("""
-           .-=========-.
-           \\'-=======-'/
-           _|   R.I.P. |_
-          ((|          |))
-           \\| %-8s |/
-            \\__     __/
-              _`) (`_
-            _/_______\\_
-           /___________\\
-           
-            Here lies the adventurer.
-            Game Over.
-            """.formatted(name));
+        System.out.println("       .-=========-.");
+        System.out.println("       \\'-=======-'/");
+        System.out.println("       _|   R.I.P. |_");
+        System.out.println("      ((|          |))");
+        System.out.println("       \\| " + name + " |/");
+        System.out.println("        \\__     __/");
+        System.out.println("          _`) (`_");
+        System.out.println("        _/_______\\_");
+        System.out.println("       /___________\\");
+        System.out.println();
+        System.out.println("        Here lies the adventurer.");
+        System.out.println("        Game Over.");
     }
 }

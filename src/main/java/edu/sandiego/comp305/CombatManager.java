@@ -101,7 +101,8 @@ public class CombatManager {
 
         for (final Item item : player.inventory) {
             if (item instanceof Potion) {
-                if (input.equals(String.valueOf(currentPotionNumber))) {
+                if (input.equals(
+                        String.valueOf(currentPotionNumber))) {
                     final Potion potion = (Potion) item;
                     player.usePotion(potion);
                     player.inventory.remove(item);
@@ -184,7 +185,8 @@ public class CombatManager {
         if (enemy instanceof BossEnemy) {
             dungeon.increaseDifficulty();
             System.out.println("The dungeon grows more dangerous...");
-            System.out.println("Difficulty is now " + dungeon.getDifficultyLevel() + ".");
+            System.out.println(
+                    "Difficulty is now " + dungeon.getDifficultyLevel() + ".");
         }
     }
 
@@ -193,3 +195,4 @@ public class CombatManager {
         return scanner.nextLine();
     }
 }
+

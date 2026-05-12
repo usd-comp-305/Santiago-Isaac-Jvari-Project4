@@ -57,6 +57,7 @@ public class EnemyTests {
 
         assertEquals(90, player.getHealth());
     }
+
     @Test
     public void increaseStatsRaisesEnemyStats() {
         final Enemy slime = new Slime();

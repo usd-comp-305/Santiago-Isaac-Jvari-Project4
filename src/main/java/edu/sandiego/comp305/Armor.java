@@ -1,13 +1,14 @@
 package edu.sandiego.comp305;
 
 public class Armor extends Item{
-    public int defenseBoost;
+    private final int defenseBoost;
 
-    public int maxDefenseBoost = 30;
-
+    public Armor(final int defenseBoost) {
+        this.defenseBoost = defenseBoost;
+    }
 
     public int getDefenseBoost() {
         return defenseBoost;
     }
-
 }
+

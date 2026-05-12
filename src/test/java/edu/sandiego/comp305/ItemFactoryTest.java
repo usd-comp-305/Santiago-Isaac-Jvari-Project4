@@ -64,3 +64,4 @@ class ItemFactoryTest {
         assertFalse(potion instanceof HealthPotion);
     }
 }
+

@@ -15,7 +15,8 @@ public class CombatManagerTests {
     public void testPlayerTurnReducesEnemyHealth() {
         final String input = "1\n";
         //simulates an input of 1
-        System.setIn(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)));
+        System.setIn(new ByteArrayInputStream(
+                input.getBytes(StandardCharsets.UTF_8)));
 
         final Dungeon dungeon = new Dungeon();
         final CombatManager combatManager = new CombatManager(dungeon);
@@ -48,7 +49,8 @@ public class CombatManagerTests {
     @Test
     public void testCombatEndsWhenEnemyDies() {
         final String input = "1\n";
-        System.setIn(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)));
+        System.setIn(new ByteArrayInputStream(
+                input.getBytes(StandardCharsets.UTF_8)));
 
         final Dungeon dungeon = new Dungeon();
         final CombatManager combatManager = new CombatManager(dungeon);

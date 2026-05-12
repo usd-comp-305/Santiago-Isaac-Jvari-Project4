@@ -10,9 +10,9 @@ class PlayerTest {
         final Player player = new Player("Isaac", 10, 0, 30);
         final EnemyFactory factory = new EnemyFactory();
         final Enemy enemy = factory.createEnemy("slime",0);
-        assertEquals(30,enemy.health);
+        assertEquals(30, enemy.getHealth());
         player.attack(enemy);
-        assertEquals(0,enemy.health);
+        assertEquals(0, enemy.getHealth());
     }
 
     @Test

@@ -3,16 +3,23 @@ package edu.sandiego.comp305;
 public class Shop {
 
     private static final int STARTING_WEAPON_PRICE = 10;
+
     private static final int STARTING_ARMOR_PRICE = 10;
+
     private static final int STARTING_POTION_PRICE = 10;
 
     private static final int WEAPON_BOOST_AMOUNT = 5;
+
     private static final int ARMOR_BOOST_AMOUNT = 3;
+
     private static final int PRICE_INCREASE = 5;
 
     private int weaponPrice;
+
     private int armorPrice;
+
     private int potionPrice;
+
 
     public Shop() {
         weaponPrice = STARTING_WEAPON_PRICE;

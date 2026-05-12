@@ -16,25 +16,25 @@ public abstract class Enemy {
 
     private static final int MIN_HEALTH = 0;
 
-    private final int maxHealth;
+    private final String name;
 
-    public String name;
+    private final String hint;
 
-    public String hint;
+    private int health;
 
-    protected int health;
+    private int maxHealth;
 
-    protected int attackPower;
+    private int attackPower;
 
-    protected int goldReward;
+    private int goldReward;
 
-    protected AttackStrategy attackStrategy;
+    private AttackStrategy attackStrategy;
 
-    protected EnemyBehaviorStrategy behaviorStrategy;
+    private EnemyBehaviorStrategy behaviorStrategy;
 
-    protected int defenseBonus = 0;
+    private int defenseBonus;
 
-    protected int attackBonus = 0;
+    private int attackBonus;
 
     public Enemy(final String name, final int health,
             final int attackPower, final int goldReward, final String hint) {

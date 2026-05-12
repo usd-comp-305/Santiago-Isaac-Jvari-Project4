@@ -28,8 +28,6 @@ public class Player {
 
     Weapon weapon;
 
-    Armor armor;
-
     int defense;
 
     ArrayList<Item> inventory = new ArrayList<>();

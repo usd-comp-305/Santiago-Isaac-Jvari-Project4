@@ -3,6 +3,7 @@ package edu.sandiego.comp305;
 public final class ItemFactory {
 
     private static final int HEALTH_POTION_COST = 10;
+
     private static final int STRENGTH_POTION_COST = 10;
 
     private ItemFactory() {
