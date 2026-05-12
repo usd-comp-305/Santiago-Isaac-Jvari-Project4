@@ -6,7 +6,7 @@ public enum PotionType {
         public Potion createPotion() {
             return new Potion() {
                 @Override
-                public void applyEffect(Player player) {
+                public void applyEffect(final Player player) {
                     player.heal(getEffectValue());
                 }
             };
@@ -17,7 +17,7 @@ public enum PotionType {
         public Potion createPotion() {
             return new Potion() {
                 @Override
-                public void applyEffect(Player player) {
+                public void applyEffect(final Player player) {
                     player.boostWeapon(getEffectValue());
                 }
             };
