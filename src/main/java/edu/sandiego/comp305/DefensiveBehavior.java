@@ -12,3 +12,4 @@ public class DefensiveBehavior implements EnemyBehavior {
         }
     }
 }
+
